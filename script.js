@@ -134,7 +134,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Kode untuk slideshow background
     const heroSection = document.querySelector('.hero');
-    const images = ['image/foto1.jpg', 'image/foto2.jpg', 'image/foto3.jpg', 'image/foto4.jpg'];
+    const images = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg'];
     let currentIndex = 0;
 
     function changeHeroBackground() {
@@ -147,4 +147,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Ganti foto setiap 2 detik
     setInterval(changeHeroBackground, 2000);
+
 });
