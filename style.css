@@ -21,7 +21,7 @@ body {
 /* Halaman Sampul (Cover) */
 .cover {
     min-height: 100vh;
-    background-image: url("image/foto4.jpg");
+    background-image: url("foto4.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -263,3 +263,4 @@ footer {
         width: 90%; /* Menyesuaikan agar gambar lebih besar di layar kecil */
     }
 }
+
