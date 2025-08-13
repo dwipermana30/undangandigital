@@ -240,27 +240,36 @@ footer {
 /* Penyesuaian untuk Layar HP */
 @media (max-width: 768px) {
     .cover .cover-couple {
-        font-size: 2.5rem; /* Ukuran teks nama di halaman awal disesuaikan */
+        font-size: 2.5rem;
     }
-    
+
+    /* Tambahkan atau ubah bagian ini */
+    .cover {
+        background-size: contain; /* Agar foto cover tidak terpotong di HP */
+        background-repeat: no-repeat; /* Mencegah pengulangan gambar */
+        background-position: center; /* Memposisikan gambar di tengah */
+        background-color: #000; /* Warna latar belakang jika ada ruang kosong */
+    }
+
     .hero-text {
         padding: 2rem 1rem;
     }
-    
+
     .couple-name {
-        font-size: 2.4rem; /* Ukuran teks nama di halaman utama disesuaikan */
+        font-size: 2.4rem;
     }
-    
+
     .countdown div {
-        flex: 1 0 45%; /* Menyesuaikan agar lebih rapi di HP */
+        flex: 1 0 45%;
     }
-    
+
     .countdown span {
         font-size: 1.2rem;
     }
 
     .photo-gallery img {
-        width: 90%; /* Menyesuaikan agar gambar lebih besar di layar kecil */
+        width: 90%;
     }
 }
+
 
