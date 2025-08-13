@@ -18,13 +18,35 @@ body {
   overflow: hidden; /* Mencegah pengguliran saat halaman sampul aktif */
 }
 
+/* Div Latar Belakang (Solusi untuk bug di HP) */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Posisikan di belakang konten */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Foto Halaman Sampul */
+.cover-bg {
+    background-image: url("foto4.jpg");
+    opacity: 1;
+}
+
+/* Foto Slideshow */
+.hero-bg {
+    background-image: url("foto1.jpg"); /* Gambar awal */
+    opacity: 0; /* Sembunyikan secara default */
+}
+
 /* Halaman Sampul (Cover) */
 .cover {
     min-height: 100vh;
-    background-image: url("foto4.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     position: fixed;
     top: 0;
     left: 0;
@@ -40,6 +62,10 @@ body {
 }
 
 .cover.fade-out {
+    opacity: 0;
+}
+
+.cover.fade-out .cover-bg {
     opacity: 0;
 }
 
@@ -82,19 +108,20 @@ body {
     transition-delay: 0s;
 }
 
-/* Section: Hero */
+#main-content.fade-in .hero-bg {
+    opacity: 1;
+}
+
+/* Section: Hero (Slideshow) */
 .hero {
     min-height: 100vh;
-    background-size: cover; /* Fit to page */
-    background-position: center;
-    background-attachment: fixed;
     position: relative;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    transition: background-image 1s ease-in-out;
+    text-align: center; /* Memastikan semua teks di dalam hero center */
+    background: transparent;
 }
 
 .hero .overlay {
@@ -158,6 +185,7 @@ h2, h3, h4, h5 {
     font-family: "Playfair Display", serif;
     font-weight: 400;
     color: var(--accent);
+    text-align: center;
 }
 
 .card {
@@ -243,12 +271,13 @@ footer {
         font-size: 2.5rem;
     }
 
-    /* Tambahkan atau ubah bagian ini */
     .cover {
-        background-size: contain; /* Agar foto cover tidak terpotong di HP */
-        background-repeat: no-repeat; /* Mencegah pengulangan gambar */
-        background-position: center; /* Memposisikan gambar di tengah */
-        background-color: #000; /* Warna latar belakang jika ada ruang kosong */
+        background-color: var(--muted);
+    }
+    
+    .hero {
+        background-color: var(--muted);
+        min-height: 100vh;
     }
 
     .hero-text {
@@ -271,5 +300,3 @@ footer {
         width: 90%;
     }
 }
-
-
