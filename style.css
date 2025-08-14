@@ -34,7 +34,7 @@ body {
 
 /* Foto Halaman Sampul */
 .cover-bg {
-    background-image: url("foto4.jpg");
+    background-image: url("foto2.jpg");
     opacity: 1;
 }
 
@@ -42,6 +42,7 @@ body {
 .hero-bg {
     background-image: url("foto1.jpg"); /* Gambar awal */
     opacity: 0; /* Sembunyikan secara default */
+    transition: opacity 1s ease-in-out;
 }
 
 /* Halaman Sampul (Cover) */
@@ -188,32 +189,127 @@ h2, h3, h4, h5 {
     text-align: center;
 }
 
+/* Styling untuk bagian baru */
+#doa {
+    background: var(--muted);
+}
+.doa-text {
+    font-style: italic;
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--accent);
+}
+
+.doa-source {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+#pengantin {
+    background: #fff;
+    padding: 3rem 0;
+}
+
+/* Style untuk Card Pengantin */
+.pengantin-card {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.pengantin-card:hover {
+    transform: scale(1.05);
+}
+
+.pengantin-overlay {
+    background: rgba(0, 0, 0, 0.45);
+    padding: 1.5rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.pengantin-card:hover .pengantin-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.pengantin-name {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.pengantin-desc {
+    font-size: 1rem;
+    opacity: 0.9;
+    color: #fff;
+}
+
 .card {
     background: #fff;
 }
 
-/* Gallery Section */
+/* --- Perubahan untuk Galeri Foto --- */
+.gallery h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    color: var(--accent);
+    text-align: center;
+    font-size: 1.8rem;
+}
+
 .photo-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.photo-gallery a {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .photo-gallery img {
-    width: 75%;
-    max-width: 450px;
+    width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
-.photo-gallery img:hover {
-    transform: scale(1.03);
-    opacity: 0.8;
+.photo-gallery a:hover img {
+    transform: scale(1.05);
 }
+/* --- Akhir Perubahan Galeri Foto --- */
 
 /* Gift Card */
 .gift-card {
@@ -295,8 +391,16 @@ footer {
     .countdown span {
         font-size: 1.2rem;
     }
-
-    .photo-gallery img {
-        width: 90%;
+    
+    #pengantin {
+        text-align: center;
+    }
+    
+    #pengantin .col-lg-6 {
+        margin-bottom: 2rem;
+    }
+    
+    .pengantin-name {
+        margin-top: 1rem;
     }
 }
