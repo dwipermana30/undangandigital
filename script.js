@@ -15,6 +15,11 @@
                 coverPage.style.display = "none";
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
+                
+                // Panggil fungsi untuk langsung menampilkan gambar pertama
+                showInitialHeroImage();
+                startSlideshow();
+                
             }, 500);
 
             if (music) {
@@ -28,6 +33,17 @@
             }
         });
     }
+    
+    // Fungsi baru untuk menampilkan gambar awal hero
+    function showInitialHeroImage() {
+        const heroBg = document.getElementById("hero-bg");
+        const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+        
+        // Set gambar pertama secara langsung
+        heroBg.style.backgroundImage = `url('${slideshowImages[0]}')`;
+        heroBg.style.opacity = '1';
+    }
+
 
     // ===================================
     // Countdown (untuk tanggal acara)
@@ -127,12 +143,6 @@
             heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
         }, 5000); // Ganti gambar setiap 5 detik
     }
-
-    // Hanya jalankan slideshow setelah undangan dibuka
-    openBtn.addEventListener("click", () => {
-        // ... kode lain
-        startSlideshow();
-    });
 
     // ===================================
     // Menonaktifkan Klik Kanan di Semua Gambar dan Halaman
