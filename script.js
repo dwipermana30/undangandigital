@@ -4,26 +4,19 @@
     // ===================================
     const openBtn = document.getElementById("open-invitation-btn");
     const coverPage = document.querySelector(".cover");
-    const coverBg = document.querySelector(".cover-bg");
-    const heroBg = document.querySelector(".hero-bg");
     const mainContent = document.getElementById("main-content");
     const music = document.getElementById("bg-music");
 
     if (openBtn) {
         openBtn.addEventListener("click", () => {
-            // Tambahkan kelas untuk memulai animasi fade out pada cover
             coverPage.classList.add("fade-out");
-            coverBg.style.opacity = "0";
 
-            // Tunggu hingga animasi cover selesai
             setTimeout(() => {
                 coverPage.style.display = "none";
                 mainContent.classList.add("fade-in");
-                heroBg.style.opacity = "1";
-                document.body.style.overflow = "auto"; /* Aktifkan kembali pengguliran */
-            }, 500); /* Waktu ini harus sesuai dengan durasi transisi di CSS */
+                document.body.style.overflow = "auto";
+            }, 500);
 
-            // Putar musik secara otomatis setelah interaksi pengguna
             if (music) {
                 music.play()
                     .then(() => {
@@ -39,74 +32,32 @@
     // ===================================
     // Countdown (untuk tanggal acara)
     // ===================================
-    const eventDate = new Date(2026, 3, 26, 8, 0, 0);
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minsEl = document.getElementById("mins");
-    const secsEl = document.getElementById("secs");
+    const countdownElement = document.getElementById("countdown");
+    if (countdownElement) {
+        const weddingDate = new Date("April 26, 2026 10:00:00").getTime();
+        const updateCountdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-    if (daysEl && hoursEl && minsEl && secsEl) {
-        function updateCountdown() {
-            const now = new Date();
-            let diff = Math.max(0, eventDate - now);
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -= days * (1000 * 60 * 60 * 24);
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-            const minutes = Math.floor(diff / (1000 * 60));
-            diff -= minutes * (1000 * 60);
-            const seconds = Math.floor(diff / 1000);
-            daysEl.textContent = String(days).padStart(2, "0");
-            hoursEl.textContent = String(hours).padStart(2, "0");
-            minsEl.textContent = String(minutes).padStart(2, "0");
-            secsEl.textContent = String(seconds).padStart(2, "0");
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // ===================================
-    // Copy Account Number
-    // ===================================
-    const copyBtn = document.getElementById("copyBtn");
-    if (copyBtn) {
-        copyBtn.addEventListener("click", function () {
-            const accEl = document.querySelector(".gift-card .accnum");
-            const acc = accEl?.textContent?.trim();
-            if (!acc) {
-                alert("Nomor rekening tidak ditemukan.");
-                return;
-            }
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(acc)
-                    .then(() => {
-                        const prevText = this.textContent;
-                        this.textContent = "Copied ✓";
-                        setTimeout(() => (this.textContent = prevText), 2000);
-                    })
-                    .catch(() => {
-                        alert("Gagal menyalin. Silakan salin manual.");
-                    });
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                countdownElement.innerHTML = "<div><span>Acara Sedang Berlangsung</span></div>";
             } else {
-                const ta = document.createElement("textarea");
-                ta.value = acc;
-                document.body.appendChild(ta);
-                ta.select();
-                try {
-                    document.execCommand("copy");
-                    this.textContent = "Copied ✓";
-                    setTimeout(() => (this.textContent = "Copy Account Number"), 2000);
-                } catch {
-                    alert("Gagal menyalin. Silakan salin manual.");
-                } finally {
-                    document.body.removeChild(ta);
-                }
+                document.getElementById("days").textContent = days.toString().padStart(2, '0');
+                document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+                document.getElementById("mins").textContent = minutes.toString().padStart(2, '0');
+                document.getElementById("secs").textContent = seconds.toString().padStart(2, '0');
             }
-        });
+        }, 1000);
     }
 
     // ===================================
-    // Kontrol Musik
+    // Autoplay Musik & Tombol Kontrol
     // ===================================
     const musicBtn = document.getElementById("music-btn");
     if (music && musicBtn) {
@@ -133,23 +84,69 @@
         music.addEventListener("play", updateBtn);
         music.addEventListener("pause", updateBtn);
     }
-})();
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Kode untuk slideshow background
-    const heroBg = document.querySelector('.hero-bg');
-    const images = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg'];
-    let currentIndex = 0;
-
-    function changeHeroBackground() {
-        heroBg.style.backgroundImage = `url('image/${images[currentIndex]}')`;
-        currentIndex = (currentIndex + 1) % images.length;
+    // ===================================
+    // Salin Nomor Rekening
+    // ===================================
+    const copyBtn = document.getElementById('copyBtn');
+    if(copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const accNum = document.querySelector('.accnum').textContent;
+            navigator.clipboard.writeText(accNum)
+                .then(() => {
+                    copyBtn.textContent = 'Nomor disalin!';
+                    setTimeout(() => copyBtn.textContent = 'Copy Account Number', 2000);
+                })
+                .catch(err => {
+                    console.error('Gagal menyalin: ', err);
+                });
+        });
     }
 
-    // Ganti foto pertama kali saat halaman dimuat
-    changeHeroBackground();
+    // ===================================
+    // Logika Modal Galeri Foto (Bootstrap)
+    // ===================================
+    const galleryModal = document.getElementById('galleryModal');
+    galleryModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const imageSource = button.getAttribute('data-src');
+        const modalImage = galleryModal.querySelector('#galleryModalImage');
+        modalImage.src = imageSource;
+    });
+    
+    // ===================================
+    // Slideshow Latar Belakang (Hero)
+    // ===================================
+    const heroBg = document.getElementById("hero-bg");
+    const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+    let currentImageIndex = 0;
 
-    // Ganti foto setiap 2 detik
-    setInterval(changeHeroBackground, 2000);
+    function startSlideshow() {
+        setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
+            heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
+        }, 5000); // Ganti gambar setiap 5 detik
+    }
 
-});
+    // Hanya jalankan slideshow setelah undangan dibuka
+    openBtn.addEventListener("click", () => {
+        // ... kode lain
+        startSlideshow();
+    });
+
+    // ===================================
+    // Menonaktifkan Klik Kanan di Semua Gambar dan Halaman
+    // ===================================
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.nodeName === 'IMG' || e.target.closest('.pengantin-card') || e.target.closest('.photo-gallery')) {
+            e.preventDefault();
+        }
+    });
+
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.nodeName === 'IMG' || e.target.closest('.pengantin-card') || e.target.closest('.photo-gallery')) {
+            e.preventDefault();
+        }
+    });
+
+})();
