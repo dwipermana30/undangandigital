@@ -11,17 +11,13 @@
 
     function startSlideshow() {
         if (heroBgImg && slideshowImages.length > 0) {
-            // Memastikan gambar pertama dimuat sebelum memulai
-            const firstImg = new Image();
-            firstImg.src = slideshowImages[0];
-            firstImg.onload = () => {
-                heroBgImg.style.opacity = '1';
-
-                slideshowInterval = setInterval(() => {
-                    currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
-                    heroBgImg.src = slideshowImages[currentImageIndex];
-                }, 5000);
-            };
+            heroBgImg.style.opacity = '1';
+            
+            // Perubahan src pada tag <img> lebih andal
+            slideshowInterval = setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
+                heroBgImg.src = slideshowImages[currentImageIndex];
+            }, 5000);
         }
     }
 
