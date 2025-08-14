@@ -13,21 +13,28 @@
     const heroBg = document.getElementById("hero-bg");
     const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
     let currentImageIndex = 0;
+    
+    // Fungsi untuk memuat semua gambar ke dalam memori
+    function preloadImages() {
+        slideshowImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
 
     function startSlideshow() {
-        setInterval(() => {
-            currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
-            heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
-        }, 5000); // Ganti gambar setiap 5 detik
-    }
-    
-    // Fungsi baru untuk menampilkan gambar awal hero
-    function showInitialHeroImage() {
-        // Set gambar pertama secara langsung
-        heroBg.style.backgroundImage = `url('${slideshowImages[0]}')`;
-        heroBg.style.opacity = '1';
-    }
+        if (heroBg && slideshowImages.length > 0) {
+            // Set gambar pertama secara manual
+            heroBg.style.backgroundImage = `url('${slideshowImages[0]}')`;
+            heroBg.style.opacity = '1';
 
+            // Mulai interval slideshow setelah 5 detik
+            setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
+                heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
+            }, 5000);
+        }
+    }
 
     if (openBtn) {
         openBtn.addEventListener("click", () => {
@@ -38,12 +45,10 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 
-                // Panggil fungsi untuk menampilkan gambar pertama
-                showInitialHeroImage();
-                // Jalankan slideshow setelah sedikit jeda
-                setTimeout(() => {
-                    startSlideshow();
-                }, 100);
+                // Panggil fungsi preload dan startSlideshow
+                preloadImages();
+                startSlideshow();
+
             }, 500);
 
             if (music) {
