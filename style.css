@@ -28,7 +28,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* Posisikan di belakang konten */
+    z-index: -2; /* Posisikan di belakang konten */
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -133,6 +133,7 @@ body {
         rgba(18, 18, 18, 0.55) 0%,
         rgba(18, 18, 18, 0.2) 60%
     );
+    z-index: -1; /* Berada di atas hero-bg, tapi di bawah konten teks */
 }
 
 .hero-text {
