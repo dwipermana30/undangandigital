@@ -7,6 +7,28 @@
     const mainContent = document.getElementById("main-content");
     const music = document.getElementById("bg-music");
 
+    // ===================================
+    // Slideshow Latar Belakang (Hero)
+    // ===================================
+    const heroBg = document.getElementById("hero-bg");
+    const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
+    let currentImageIndex = 0;
+
+    function startSlideshow() {
+        setInterval(() => {
+            currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
+            heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
+        }, 5000); // Ganti gambar setiap 5 detik
+    }
+    
+    // Fungsi baru untuk menampilkan gambar awal hero
+    function showInitialHeroImage() {
+        // Set gambar pertama secara langsung
+        heroBg.style.backgroundImage = `url('${slideshowImages[0]}')`;
+        heroBg.style.opacity = '1';
+    }
+
+
     if (openBtn) {
         openBtn.addEventListener("click", () => {
             coverPage.classList.add("fade-out");
@@ -16,10 +38,12 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 
-                // Panggil fungsi untuk langsung menampilkan gambar pertama
+                // Panggil fungsi untuk menampilkan gambar pertama
                 showInitialHeroImage();
-                startSlideshow();
-                
+                // Jalankan slideshow setelah sedikit jeda
+                setTimeout(() => {
+                    startSlideshow();
+                }, 100);
             }, 500);
 
             if (music) {
@@ -33,17 +57,6 @@
             }
         });
     }
-    
-    // Fungsi baru untuk menampilkan gambar awal hero
-    function showInitialHeroImage() {
-        const heroBg = document.getElementById("hero-bg");
-        const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
-        
-        // Set gambar pertama secara langsung
-        heroBg.style.backgroundImage = `url('${slideshowImages[0]}')`;
-        heroBg.style.opacity = '1';
-    }
-
 
     // ===================================
     // Countdown (untuk tanggal acara)
@@ -131,20 +144,6 @@
     });
     
     // ===================================
-    // Slideshow Latar Belakang (Hero)
-    // ===================================
-    const heroBg = document.getElementById("hero-bg");
-    const slideshowImages = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"];
-    let currentImageIndex = 0;
-
-    function startSlideshow() {
-        setInterval(() => {
-            currentImageIndex = (currentImageIndex + 1) % slideshowImages.length;
-            heroBg.style.backgroundImage = `url('${slideshowImages[currentImageIndex]}')`;
-        }, 5000); // Ganti gambar setiap 5 detik
-    }
-
-    // ===================================
     // Menonaktifkan Klik Kanan di Semua Gambar dan Halaman
     // ===================================
     document.addEventListener('contextmenu', function(e) {
@@ -158,5 +157,4 @@
             e.preventDefault();
         }
     });
-
 })();
