@@ -30,7 +30,7 @@
             slideshowTimeout = setTimeout(() => {
                 nextImage();
                 startSlideshow();
-            }, 10000); // Ganti foto setiap 10 detik
+            }, 50000); // Ganti foto setiap 10 detik
         }
     }
 
