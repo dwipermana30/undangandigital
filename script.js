@@ -130,8 +130,8 @@
     // --- Galeri Modal & Swipe Functionality ---
     const galleryModal = document.getElementById('galleryModal');
     const galleryImages = [
-        'foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg', 
-        'foto5.jpg', 'foto6.jpg', 'foto7.jpg', 'foto8.jpg'
+        'foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 
+        'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'
     ];
     let currentGalleryIndex = 0;
     const galleryModalImage = document.getElementById('galleryModalImage');
