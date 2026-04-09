@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
 }
 
-/* FIX KLIK: Agar background tidak menghalangi tombol */
+/* --- FIX KLIK --- */
 .background-container {
     position: fixed;
     top: 0;
@@ -24,14 +24,11 @@ body {
     width: 100%;
     height: 100vh;
     z-index: -2;
-    transition: opacity 0.5s ease-in-out;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     pointer-events: none; 
 }
-
-.cover-bg { background-image: url("foto2.webp"); opacity: 1; }
 
 .cover {
     min-height: 100vh;
@@ -45,8 +42,7 @@ body {
     justify-content: center;
     text-align: center;
     z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in-out;
 }
 
 .cover.fade-out { opacity: 0; pointer-events: none; }
@@ -60,7 +56,7 @@ body {
     border-radius: 12px;
 }
 
-/* --- HERO SLIDESHOW: FIX TRANSISI HALUS --- */
+/* --- HERO SLIDESHOW & TEXT (KEMBALI KE DESAIN ASLI) --- */
 .hero {
     height: 100vh;
     position: relative;
@@ -99,7 +95,6 @@ body {
     opacity: 1;
     filter: blur(0);
     z-index: 2;
-    /* Parameter alternate memastikan zoom out kembali dengan halus (tidak patah) */
     animation: smoothZoom 10s ease-in-out infinite alternate;
 }
 
@@ -108,70 +103,78 @@ body {
     100% { transform: translate(-50%, -50%) scale(1.08); }
 }
 
-/* --- DESAIN PENGANTIN (KEMBALI KE ASLI DENGAN OVERLAY) --- */
-#pengantin { background: #fff; padding: 3rem 0; }
+/* Teks di depan Slideshow */
+.hero-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 90%;
+}
 
+.couple-name {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.small-intro, .date { font-size: 1rem; opacity: 0.9; }
+
+/* COUNTDOWN (KEMBALI KE DESAIN KOTAK ASLI) */
+.countdown {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.countdown div {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 14px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 70px;
+}
+
+.countdown span { display: block; font-size: 1.4rem; font-weight: 700; }
+
+/* --- PENGANTIN CARD (DESAIN OVERLAY ASLI) --- */
+#pengantin { background: #fff; padding: 3rem 0; }
 .pengantin-card {
     position: relative;
-    display: block;
-    width: 100%;
     max-width: 450px;
     margin: 0 auto;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     overflow: hidden;
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
-.pengantin-card:hover { transform: scale(1.05); }
-
-.pengantin-card .pengantin-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-}
-
+.pengantin-img { width: 100%; height: auto; object-fit: contain; display: block; }
 .pengantin-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.45);
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #fff;
-    transition: background 0.3s ease;
 }
+.pengantin-name { font-family: "Playfair Display", serif; font-size: 2rem; font-weight: 700; }
 
-.pengantin-card:hover .pengantin-overlay { background: rgba(0, 0, 0, 0.6); }
+/* MODAL & GALLERY */
+.photo-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; width: 90%; margin: 0 auto; }
+.photo-gallery img { width: 100%; border-radius: 8px; cursor: pointer; }
 
-.pengantin-name {
-    font-family: "Playfair Display", serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-}
-
-.pengantin-desc { font-size: 1rem; opacity: 0.9; color: #fff; }
-
-/* --- SISA DESAIN (TIDAK BERUBAH) --- */
-.couple-name { font-family: "Playfair Display", serif; font-size: 3rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-.countdown { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-.countdown div { background: rgba(255, 255, 255, 0.08); padding: 12px 14px; border-radius: 8px; text-align: center; flex: 1 0 21%; }
-.countdown span { display: block; font-size: 1.4rem; }
-
+/* LAINNYA */
+#main-content { opacity: 0; visibility: hidden; transition: opacity 1s ease-in-out; }
+#main-content.fade-in { opacity: 1; visibility: visible; }
 .music-btn { position: fixed; bottom: 20px; right: 20px; background: #a77b5a; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; z-index: 999; }
-.custom-open-btn { background-color: transparent !important; border: 1px solid #ffffff !important; color: #ffffff !important; padding: 10px 20px; transition: all 0.3s ease; cursor: pointer; }
+.custom-open-btn { background: transparent; border: 1px solid #fff; color: #fff; padding: 10px 20px; cursor: pointer; }
 
 @media (max-width: 768px) {
+    .couple-name { font-size: 2.5rem; }
     .hero-bg-img { width: 100%; height: auto; object-fit: contain; }
-    .countdown div { flex: 1 0 45%; }
 }
