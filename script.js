@@ -5,12 +5,12 @@
     const music = document.getElementById("bg-music");
     const heroBgImages = document.querySelectorAll(".hero-bg-img");
     
-    // Deklarasi variabel cukup SEKALI saja di sini
     let currentImageIndex = 0;
     let slideshowTimeout;
 
     // --- Hero Slideshow Logic ---
     function showImage(nextIndex) {
+        if (!heroBgImages.length) return;
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
 
@@ -18,7 +18,6 @@
             currentImg.classList.remove("active");
             currentImg.classList.add("exit");
         }
-
         if (nextImg) {
             nextImg.classList.remove("exit");
             nextImg.classList.add("active");
@@ -29,11 +28,11 @@
                 if (idx !== nextIndex) img.classList.remove("exit");
             });
         }, 1500);
-
         currentImageIndex = nextIndex;
     }
 
     function startSlideshow() {
+        if (!heroBgImages.length) return;
         clearTimeout(slideshowTimeout);
         slideshowTimeout = setTimeout(() => {
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
@@ -42,20 +41,34 @@
         }, 10000); 
     }
 
-    // --- Buka Undangan Logic ---
+    // --- Buka Undangan Logic (FIXED) ---
     if (openBtn) {
-        openBtn.addEventListener("click", () => {
-            coverPage.classList.add("fade-out");
-            setTimeout(() => {
-                coverPage.style.display = "none";
-                mainContent.classList.add("fade-in");
-                document.body.style.overflow = "auto";
-                startSlideshow(); 
-            }, 500);
+        openBtn.addEventListener("click", function(e) {
+            e.preventDefault();
             
-            if (music) {
-                music.play().catch(e => console.log("Autoplay blocked:", e));
+            // Animasi menghilang
+            if (coverPage) {
+                coverPage.classList.add("fade-out");
+                coverPage.style.pointerEvents = "none"; 
             }
+
+            setTimeout(() => {
+                if (coverPage) coverPage.style.display = "none";
+                
+                // Tampilkan konten utama
+                if (mainContent) {
+                    mainContent.classList.add("fade-in");
+                    mainContent.style.visibility = "visible";
+                }
+                
+                document.body.style.overflow = "auto";
+                
+                // Jalankan fungsi tambahan
+                startSlideshow();
+                if (music) {
+                    music.play().catch(err => console.log("Autoplay blocked"));
+                }
+            }, 800);
         });
     }
 
@@ -64,13 +77,9 @@
     setInterval(() => {
         const now = new Date().getTime();
         const diff = weddingDate - now;
-
         if (diff > 0) {
-            const d = document.getElementById("days");
-            const h = document.getElementById("hours");
-            const m = document.getElementById("mins");
-            const s = document.getElementById("secs");
-
+            const d = document.getElementById("days"), h = document.getElementById("hours"),
+                  m = document.getElementById("mins"), s = document.getElementById("secs");
             if(d) d.textContent = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             if(h) h.textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             if(m) m.textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
@@ -82,13 +91,8 @@
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
-            if (music.paused) {
-                music.play();
-                musicBtn.textContent = "🎵";
-            } else {
-                music.pause();
-                musicBtn.textContent = "🔇";
-            }
+            if (music.paused) { music.play(); musicBtn.textContent = "🎵"; }
+            else { music.pause(); musicBtn.textContent = "🔇"; }
         });
     }
 
@@ -104,29 +108,22 @@
         });
     });
 
-    const nextBtn = document.getElementById('nextGalleryBtn');
-    if(nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
-            if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
-        });
-    }
-
-    const prevBtn = document.getElementById('prevGalleryBtn');
-    if(prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
-            if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
-        });
-    }
+    const nextBtn = document.getElementById('nextGalleryBtn'), prevBtn = document.getElementById('prevGalleryBtn');
+    if(nextBtn) nextBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
+    if(prevBtn) prevBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
 
     // --- Copy Rekening ---
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
-            const accNumElement = document.querySelector('.accnum');
-            if(accNumElement) {
-                const accNum = accNumElement.textContent;
+            const accNum = document.querySelector('.accnum')?.textContent;
+            if(accNum) {
                 navigator.clipboard.writeText(accNum).then(() => {
                     const originalText = copyBtn.textContent;
                     copyBtn.textContent = 'Tersalin!';
