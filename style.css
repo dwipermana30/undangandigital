@@ -510,3 +510,22 @@ footer {
         object-fit: contain; /* Memastikan foto tidak terpotong */
     }
 }
+/* Custom request: Tombol transparan bingkai putih */
+.custom-open-btn {
+    background-color: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.custom-open-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+.custom-open-btn svg {
+    fill: white;
+}
