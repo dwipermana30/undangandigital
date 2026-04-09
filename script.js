@@ -8,10 +8,9 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- Hero Slideshow Logic (SMOOTH TRANSITION) ---
+    // --- Hero Slideshow Logic ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
-        
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
 
@@ -19,19 +18,15 @@
             currentImg.classList.remove("active");
             currentImg.classList.add("exit");
         }
-
         if (nextImg) {
             nextImg.classList.remove("exit");
             nextImg.classList.add("active");
         }
-
-        // Hapus class exit setelah transisi selesai
         setTimeout(() => {
             heroBgImages.forEach((img, idx) => {
                 if (idx !== nextIndex) img.classList.remove("exit");
             });
         }, 2000);
-
         currentImageIndex = nextIndex;
     }
 
@@ -41,25 +36,20 @@
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
             startSlideshow();
-        }, 11000); // 11 detik ganti (sinkron dengan durasi animasi CSS)
+        }, 11000);
     }
 
-    // --- Buka Undangan Logic (FIXED CLICK) ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
             coverPage.classList.add("fade-out");
-            
             setTimeout(() => {
                 coverPage.style.display = "none";
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
             }, 500);
-            
-            if (music) {
-                music.play().catch(err => console.log("Autoplay blocked"));
-            }
+            if (music) music.play().catch(err => console.log("Music blocked"));
         });
     }
 
@@ -78,7 +68,7 @@
         }
     }, 1000);
 
-    // --- Music & Gallery Logic (TIDAK BERUBAH) ---
+    // --- Music & Gallery Logic ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -87,18 +77,32 @@
         });
     }
 
-    const galleryImages = ['foto1.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp'];
+    const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
+    const nextBtn = document.getElementById('nextGalleryBtn');
+    const prevBtn = document.getElementById('prevGalleryBtn');
 
-    document.querySelectorAll('[data-bs-target="#galleryModal"]').forEach(item => {
+    // Klik Foto Galeri
+    document.querySelectorAll('.photo-gallery [data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             currentGalleryIndex = parseInt(this.getAttribute('data-index'));
             if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+            if(prevBtn) prevBtn.style.display = 'block';
+            if(nextBtn) nextBtn.style.display = 'block';
         });
     });
 
-    const nextBtn = document.getElementById('nextGalleryBtn'), prevBtn = document.getElementById('prevGalleryBtn');
+    // Klik Foto Pengantin (Baru)
+    document.querySelectorAll('.pengantin-card[data-bs-target="#galleryModal"]').forEach(item => {
+        item.addEventListener('click', function() {
+            const imgSrc = this.getAttribute('data-img');
+            if(modalImg) modalImg.src = imgSrc;
+            if(prevBtn) prevBtn.style.display = 'none';
+            if(nextBtn) nextBtn.style.display = 'none';
+        });
+    });
+
     if(nextBtn) nextBtn.addEventListener('click', () => {
         currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
@@ -108,6 +112,7 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
+    // Copy Rekening
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
