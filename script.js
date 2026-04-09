@@ -9,10 +9,31 @@
     let slideshowTimeout;
 
     // --- Hero Slideshow
-    function showImage(index) {
-        heroBgImages.forEach(img => img.classList.remove("active"));
-        heroBgImages[index].classList.add("active");
+    function showImage(nextIndex) {
+        const currentImg = heroBgImages[currentImageIndex]; // Foto lama
+        const nextImg = heroBgImages[nextIndex];           // Foto baru
+    if (currentImg) {
+            currentImg.classList.remove("active");
+            currentImg.classList.add("exit");
+    nextImg.classList.remove("exit");
+        nextImg.classList.add("active");    
+    setTimeout(() => {
+            heroBgImages.forEach((img, idx) => {
+                if (idx !== nextIndex) img.classList.remove("exit");
+            });
+        }, 1500); // Harus sama dengan durasi transition di CSS
+
+        currentImageIndex = nextIndex;
     }
+
+    function startSlideshow() {
+        clearTimeout(slideshowTimeout);
+        slideshowTimeout = setTimeout(() => {
+            const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
+            showImage(nextIndex);
+            startSlideshow();
+        }, 10000); // Ganti foto setiap 10 detik (sesuaikan dengan animasi CSS)
+        }
 
     function startSlideshow() {
         clearTimeout(slideshowTimeout);
