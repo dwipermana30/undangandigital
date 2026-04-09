@@ -14,17 +14,18 @@ body {
   overflow-x: hidden;
 }
 
-/* FIX: Mencegah background menghalangi klik */
+/* --- Background & Cover (Fixed Click Issue) --- */
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: -2; 
-    pointer-events: none; /* Tombol di depan jadi bisa diklik */
-    background-size: cover;
+    z-index: -2;
+    pointer-events: none; /* Klik menembus ke tombol */
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; /* Sesuai kode lama Anda */
 }
 
 .cover-bg {
@@ -43,9 +44,9 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    z-index: 9999; /* Sangat tinggi agar di depan semua elemen */
-    background: rgba(0,0,0,0.2); /* Gelapkan sedikit covernya */
-    transition: opacity 0.8s ease;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
 }
 
 .cover.fade-out {
@@ -53,24 +54,37 @@ body {
     pointer-events: none;
 }
 
-/* Rest of your Hero and Other Styles remain the same... */
+/* --- Hero Slideshow (Pas di Layar) --- */
 .hero {
     height: 100vh;
     position: relative;
-    overflow: hidden;
     background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(18,18,18,0.4) 0%, rgba(18,18,18,0.1) 60%);
+    z-index: 3;
 }
 
 .hero-bg-img {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Menjaga foto tidak terpotong */
+    transform: translate(-50%, -50%) scale(1.05);
     opacity: 0;
-    filter: blur(15px);
-    transition: opacity 1.5s ease, filter 1.5s ease;
+    filter: blur(8px);
+    transition: opacity 2s ease, filter 2s ease;
     z-index: 1;
 }
 
@@ -78,13 +92,63 @@ body {
     opacity: 1;
     filter: blur(0);
     z-index: 2;
-    animation: zoomInOut 12s ease-in-out infinite;
+    animation: kenburns 10s ease-in-out forwards;
 }
 
-@keyframes zoomInOut {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+@keyframes kenburns {
+    0% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1.10); }
 }
 
-/* Copy sisa CSS Anda (Gallery, Modal, dll) di bawah sini tanpa perubahan */
+/* --- Sisa Style (Gallery, Pengantin, Countdown) --- */
+.countdown {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+}
+
+.countdown div {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 60px;
+}
+
+.pengantin-card {
+    position: relative;
+    max-width: 450px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pengantin-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.custom-open-btn {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.custom-open-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .hero-bg-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
