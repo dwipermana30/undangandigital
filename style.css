@@ -243,26 +243,31 @@ h2, h3, h4, h5 {
 
 #pengantin .col-lg-6 .pengantin-card {
     opacity: 0;
-    /* Durasi 2.5s agar sangat halus */
-    transition: transform 2.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 2.5s ease-out;
+    /* Durasi 3 detik agar sangat lambat dan elegan */
+    transition: transform 3.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 3.0s ease-out;
     pointer-events: none;
 }
 
-/* Pengantin 1: Dari Kiri */
+/* Posisi Awal Pengantin 1 (Kiri) */
 #pengantin .col-lg-6:nth-child(1) .pengantin-card {
     transform: translateX(-150px);
 }
 
-/* Pengantin 2: Dari Kanan (Nilai Positif) */
+/* Posisi Awal Pengantin 2 (Kanan) */
 #pengantin .col-lg-6:nth-child(2) .pengantin-card {
     transform: translateX(150px);
 }
 
-/* Class 'animated' aktif saat kartu masuk ke layar */
+/* Saat kartu masuk ke layar (Class ditambahkan via JS) */
 #pengantin .col-lg-6.animated .pengantin-card {
     opacity: 1 !important;
-    transform: translateX(0) !important; 
+    transform: translateX(0) !important;
     pointer-events: auto;
+}
+
+/* KHUSUS PENGANTIN 2: Beri jeda 0.8 detik agar tidak barengan dengan yang pertama */
+#pengantin .col-lg-6:nth-child(2).animated .pengantin-card {
+    transition-delay: 0.8s;
 }
 
 /* --- DESAIN KARTU & OVERLAY --- */
@@ -299,13 +304,13 @@ h2, h3, h4, h5 {
     z-index: 5;
 }
 
-/* --- TIPOGRAFI (PUTIH BERSIH) --- */
+/* --- WARNA FONT NAMA (PUTIH) --- */
 
 .pengantin-name {
     font-family: "Playfair Display", serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffffff !important; /* Paksa warna putih */
+    color: #ffffff !important; /* Memaksa jadi putih */
     margin-bottom: 0.3rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
@@ -320,15 +325,14 @@ h2, h3, h4, h5 {
 /* --- RESPONSIVE MOBILE --- */
 
 @media (max-width: 768px) {
-    #pengantin .col-lg-6:nth-child(1) .pengantin-card {
-        transform: translateX(-80px);
-    }
-    #pengantin .col-lg-6:nth-child(2) .pengantin-card {
-        transform: translateX(80px);
-    }
-    .pengantin-card {
-        width: 85%;
-        margin-bottom: 2rem;
+    #pengantin .col-lg-6:nth-child(1) .pengantin-card { transform: translateX(-80px); }
+    #pengantin .col-lg-6:nth-child(2) .pengantin-card { transform: translateX(80px); }
+    
+    .pengantin-card { width: 85%; margin-bottom: 2rem; }
+    
+    /* Di mobile, kurangi delay agar user tidak menunggu terlalu lama saat scroll */
+    #pengantin .col-lg-6:nth-child(2).animated .pengantin-card {
+        transition-delay: 0.3s;
     }
 }
 .card {
