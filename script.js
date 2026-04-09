@@ -97,17 +97,33 @@
     window.addEventListener("scroll", animateOnScroll);
 
     // --- 4. Countdown Timer ---
-    const weddingDate = new Date("May 26, 2026 10:00:00").getTime(); // Sesuaikan tanggal
-    setInterval(() => {
+    const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
+    const countdownInterval = setInterval(() => {
         const now = new Date().getTime();
         const diff = weddingDate - now;
+
         if (diff > 0) {
-            const d = document.getElementById("days"), h = document.getElementById("hours"),
-                  m = document.getElementById("mins"), s = document.getElementById("secs");
-            if(d) d.textContent = Math.floor(diff / (1000*60*60*24)).toString().padStart(2,'0');
-            if(h) h.textContent = Math.floor((diff % (1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
-            if(m) m.textContent = Math.floor((diff % (1000*60*60))/(1000*60)).toString().padStart(2,'0');
-            if(s) s.textContent = Math.floor((diff % (1000*60))/1000).toString().padStart(2,'0');
+            const d = document.getElementById("days");
+            const h = document.getElementById("hours");
+            const m = document.getElementById("mins");
+            const s = document.getElementById("secs");
+
+            // Perhitungan Matematika Waktu
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Update Teks (Gunakan padStart agar selalu 2 digit, misal: 09)
+            if(d) d.textContent = days.toString().padStart(2, '0');
+            if(h) h.textContent = hours.toString().padStart(2, '0');
+            if(m) m.textContent = mins.toString().padStart(2, '0');
+            if(s) s.textContent = secs.toString().padStart(2, '0');
+        } else {
+            // Jika waktu sudah lewat
+            const countdownContainer = document.querySelector(".countdown");
+            if(countdownContainer) countdownContainer.innerHTML = "<h4>Acara Sedang Berlangsung</h4>";
+            clearInterval(countdownInterval);
         }
     }, 1000);
 
