@@ -424,25 +424,31 @@ h2, h3, h4, h5 {
 .btn-save-date {
     display: inline-block;
     margin-top: 20px;
-    padding: 12px 25px;
-    background-color: var(--accent);
-    color: #fff !important;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+    padding: 10px 28px;
     
-    /* Kunci utamanya di sini: z-index harus lebih tinggi dari .overlay (3) */
+    /* Membuat background transparan dan bingkai putih */
+    background-color: transparent;
+    color: #ffffff !important;
+    border: 2px solid #ffffff; /* Garis tepi putih */
+    
+    text-decoration: none;
+    border-radius: 50px; /* Membuat bentuk oval sempurna */
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease-in-out;
+    
     position: relative; 
     z-index: 99; 
     cursor: pointer;
+    backdrop-filter: blur(2px); /* Memberikan efek blur halus di belakang tombol */
 }
 
 .btn-save-date:hover {
-    background-color: #5a4d3f;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    /* Efek saat kursor menempel */
+    background-color: rgba(255, 255, 255, 0.2); /* Putih transparan saat hover */
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 /* --- RESPONSIVE MOBILE --- */
