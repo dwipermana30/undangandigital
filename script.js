@@ -7,43 +7,47 @@
     
     let currentImageIndex = 0;
     let slideshowTimeout;
+    const slideshowDuration = 12000;
 
     // --- Slideshow Logic ---
-    function showImage(nextIndex) {
-        if (!heroBgImages.length) return;
-        
+   function showImage(nextIndex) {
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
 
+        // 1. Beri class 'exit' pada foto yang sedang tampil (mulai blur & fade out)
         if (currentImg) {
             currentImg.classList.remove("active");
             currentImg.classList.add("exit");
         }
 
+        // 2. Bersihkan class 'exit' dari foto sebelumnya yang sudah tidak tampil
+        heroBgImages.forEach((img, idx) => {
+            if (idx !== currentImageIndex && idx !== nextIndex) {
+                img.classList.remove("exit");
+            }
+        });
+
+        // 3. Munculkan foto berikutnya (tanpa blur, mulai animasi zoom baru)
         if (nextImg) {
             nextImg.classList.remove("exit");
             nextImg.classList.add("active");
         }
 
-        // Membersihkan class exit setelah transisi selesai
-        setTimeout(() => {
-            heroBgImages.forEach((img, idx) => {
-                if (idx !== nextIndex) img.classList.remove("exit");
-            });
-        }, 2000);
-
+        // Update index saat ini
         currentImageIndex = nextIndex;
     }
 
     function startSlideshow() {
+        // Bersihkan timeout lama jika ada
         clearTimeout(slideshowTimeout);
+        
+        // Loop slideshow
         slideshowTimeout = setTimeout(() => {
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
-            startSlideshow();
-        }, 9000); // Sinkron dengan siklus zoom di CSS agar tidak melompat
+            startSlideshow(); // Panggil ulang untuk foto berikutnya
+        }, slideshowDuration);
     }
-
     // --- Buka Undangan Logic ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
