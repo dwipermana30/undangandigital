@@ -7,48 +7,44 @@
     
     let currentImageIndex = 0;
     let slideshowTimeout;
-    const slideshowDuration = 12000;
 
-    // --- Slideshow Logic ---
-   function showImage(nextIndex) {
+    // --- Hero Slideshow Logic (SMOOTH TRANSITION) ---
+    function showImage(nextIndex) {
+        if (!heroBgImages.length) return;
+        
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
 
-        // 1. Beri class 'exit' pada foto yang sedang tampil (mulai blur & fade out)
         if (currentImg) {
             currentImg.classList.remove("active");
             currentImg.classList.add("exit");
         }
 
-        // 2. Bersihkan class 'exit' dari foto sebelumnya yang sudah tidak tampil
-        heroBgImages.forEach((img, idx) => {
-            if (idx !== currentImageIndex && idx !== nextIndex) {
-                img.classList.remove("exit");
-            }
-        });
-
-        // 3. Munculkan foto berikutnya (tanpa blur, mulai animasi zoom baru)
         if (nextImg) {
             nextImg.classList.remove("exit");
             nextImg.classList.add("active");
         }
 
-        // Update index saat ini
+        // Hapus class exit setelah transisi selesai
+        setTimeout(() => {
+            heroBgImages.forEach((img, idx) => {
+                if (idx !== nextIndex) img.classList.remove("exit");
+            });
+        }, 2000);
+
         currentImageIndex = nextIndex;
     }
 
     function startSlideshow() {
-        // Bersihkan timeout lama jika ada
         clearTimeout(slideshowTimeout);
-        
-        // Loop slideshow
         slideshowTimeout = setTimeout(() => {
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
-            startSlideshow(); // Panggil ulang untuk foto berikutnya
-        }, slideshowDuration);
+            startSlideshow();
+        }, 11000); // 11 detik ganti (sinkron dengan durasi animasi CSS)
     }
-    // --- Buka Undangan Logic ---
+
+    // --- Buka Undangan Logic (FIXED CLICK) ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -59,10 +55,10 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
-            }, 800);
+            }, 500);
             
             if (music) {
-                music.play().catch(err => console.log("Music blocked"));
+                music.play().catch(err => console.log("Autoplay blocked"));
             }
         });
     }
@@ -82,7 +78,7 @@
         }
     }, 1000);
 
-    // --- Music Toggle ---
+    // --- Music & Gallery Logic (TIDAK BERUBAH) ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -91,7 +87,6 @@
         });
     }
 
-    // --- Gallery & Copy (TIDAK DIUBAH) ---
     const galleryImages = ['foto1.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
@@ -119,8 +114,9 @@
             const accNum = document.querySelector('.accnum')?.textContent;
             if(accNum) {
                 navigator.clipboard.writeText(accNum).then(() => {
+                    const originalText = copyBtn.textContent;
                     copyBtn.textContent = 'Tersalin!';
-                    setTimeout(() => copyBtn.textContent = 'Salin No. Rekening', 2000);
+                    setTimeout(() => copyBtn.textContent = originalText, 2000);
                 });
             }
         });
