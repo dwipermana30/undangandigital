@@ -8,12 +8,30 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- Hero Slideshow Logic ---
+    // --- Hero Slideshow Logic (SMOOTH TRANSITION) ---
     function showImage(nextIndex) {
+        if (!heroBgImages.length) return;
+        
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
-        if (currentImg) currentImg.classList.remove("active");
-        if (nextImg) nextImg.classList.add("active");
+
+        if (currentImg) {
+            currentImg.classList.remove("active");
+            currentImg.classList.add("exit");
+        }
+
+        if (nextImg) {
+            nextImg.classList.remove("exit");
+            nextImg.classList.add("active");
+        }
+
+        // Hapus class exit setelah transisi selesai
+        setTimeout(() => {
+            heroBgImages.forEach((img, idx) => {
+                if (idx !== nextIndex) img.classList.remove("exit");
+            });
+        }, 2000);
+
         currentImageIndex = nextIndex;
     }
 
@@ -23,23 +41,24 @@
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
             startSlideshow();
-        }, 10000); 
+        }, 11000); // 11 detik ganti (sinkron dengan durasi animasi CSS)
     }
 
     // --- Buka Undangan Logic (FIXED CLICK) ---
     if (openBtn) {
-        openBtn.addEventListener("click", function() {
+        openBtn.addEventListener("click", function(e) {
+            e.preventDefault();
             coverPage.classList.add("fade-out");
+            
             setTimeout(() => {
                 coverPage.style.display = "none";
                 mainContent.classList.add("fade-in");
-                mainContent.style.visibility = "visible";
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
             }, 500);
             
             if (music) {
-                music.play().catch(e => console.log("Autoplay blocked:", e));
+                music.play().catch(err => console.log("Autoplay blocked"));
             }
         });
     }
@@ -52,14 +71,14 @@
         if (diff > 0) {
             const d = document.getElementById("days"), h = document.getElementById("hours"),
                   m = document.getElementById("mins"), s = document.getElementById("secs");
-            if(d) d.textContent = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            if(h) h.textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            if(m) m.textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            if(s) s.textContent = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            if(d) d.textContent = Math.floor(diff / (1000*60*60*24)).toString().padStart(2,'0');
+            if(h) h.textContent = Math.floor((diff % (1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
+            if(m) m.textContent = Math.floor((diff % (1000*60*60))/(1000*60)).toString().padStart(2,'0');
+            if(s) s.textContent = Math.floor((diff % (1000*60))/1000).toString().padStart(2,'0');
         }
     }, 1000);
 
-    // --- Music Toggle ---
+    // --- Music & Gallery Logic (TIDAK BERUBAH) ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -68,7 +87,6 @@
         });
     }
 
-    // --- Gallery Modal Logic ---
     const galleryImages = ['foto1.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
@@ -90,7 +108,6 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
-    // --- Copy Rekening ---
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
