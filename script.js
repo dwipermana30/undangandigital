@@ -9,19 +9,32 @@
     let slideshowTimeout;
 
     // --- Hero Slideshow
+    // --- Hero Slideshow Logic ---
+    let currentImageIndex = 0;
+    let slideshowTimeout;
+
     function showImage(nextIndex) {
-        const currentImg = heroBgImages[currentImageIndex]; // Foto lama
-        const nextImg = heroBgImages[nextIndex];           // Foto baru
-    if (currentImg) {
+        const currentImg = heroBgImages[currentImageIndex];
+        const nextImg = heroBgImages[nextIndex];
+
+        // 1. Foto lama mulai blur dan menghilang
+        if (currentImg) {
             currentImg.classList.remove("active");
             currentImg.classList.add("exit");
-    nextImg.classList.remove("exit");
-        nextImg.classList.add("active");    
-    setTimeout(() => {
+        }
+
+        // 2. Foto baru muncul dan mulai animasi zoom
+        if (nextImg) {
+            nextImg.classList.remove("exit");
+            nextImg.classList.add("active");
+        }
+
+        // 3. Bersihkan class exit setelah transisi selesai
+        setTimeout(() => {
             heroBgImages.forEach((img, idx) => {
                 if (idx !== nextIndex) img.classList.remove("exit");
             });
-        }, 1500); // Harus sama dengan durasi transition di CSS
+        }, 1500);
 
         currentImageIndex = nextIndex;
     }
@@ -32,16 +45,7 @@
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
             startSlideshow();
-        }, 10000); // Ganti foto setiap 10 detik (sesuaikan dengan animasi CSS)
-        }
-
-    function startSlideshow() {
-        clearTimeout(slideshowTimeout);
-        slideshowTimeout = setTimeout(() => {
-            currentImageIndex = (currentImageIndex + 1) % heroBgImages.length;
-            showImage(currentImageIndex);
-            startSlideshow();
-        }, 6000); // Ganti foto setiap 6 detik agar terasa dinamis
+        }, 10000); // Ganti foto setiap 10 detik agar sinkron dengan CSS
     }
 
     // --- Buka Undangan Logic
