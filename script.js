@@ -44,26 +44,34 @@
     }
 
     // --- 2. Scroll Trigger Logic (Pengantin & Galeri) ---
-    function animateOnScroll() {
+   function animateOnScroll() {
+        // Ambil posisi scroll saat ini
+        const windowHeight = window.innerHeight;
+
         // Animasi Pengantin
         pengantinCards.forEach((card) => {
             if (card.classList.contains("animated")) return;
             const rect = card.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.85) {
+            // Trigger ketika elemen sudah masuk 100px ke dalam layar
+            if (rect.top < windowHeight - 100) {
                 card.classList.add("animated");
             }
         });
 
-        // Animasi Galeri (Gantung)
+       // Animasi Galeri (Gantung)
         galleryItems.forEach((item) => {
             if (item.classList.contains("animated")) return;
             const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.9) {
+            // Dibuat lebih sensitif agar tidak nyangkut
+            if (rect.top < windowHeight - 50) {
                 item.classList.add("animated");
             }
         });
     }
-
+// PENTING: Jalankan fungsi sekali saat window di-resize atau di-scroll
+    window.addEventListener("scroll", animateOnScroll);
+    window.addEventListener("resize", animateOnScroll);
+    
     // --- 3. Buka Undangan Event ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
