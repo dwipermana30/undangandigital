@@ -308,31 +308,41 @@ h2, h3, h4, h5 {
 
 .pengantin-name {
     font-family: "Playfair Display", serif;
-    font-size: 1.8rem;
+    /* Ukuran desktop dinaikkan sedikit agar lebih mewah */
+    font-size: 2.2rem; 
     font-weight: 700;
-    color: #ffffff !important; /* Memaksa jadi putih */
-    margin-bottom: 0.3rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    color: #ffffff !important; /* Tetap putih bersih */
+    margin-bottom: 0.2rem;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.9);
 }
-
 .pengantin-desc {
-    font-size: 0.85rem;
-    color: #f0f0f0 !important;
-    line-height: 1.5;
+    font-size: 1rem; /* Ukuran teks deskripsi diperjelas */
+    color: #f8f8f8 !important;
+    line-height: 1.6;
+    margin-bottom: 0;
     font-weight: 300;
+    opacity: 0.9;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* --- RESPONSIVE MOBILE --- */
-
 @media (max-width: 768px) {
-    #pengantin .col-lg-6:nth-child(1) .pengantin-card { transform: translateX(-80px); }
-    #pengantin .col-lg-6:nth-child(2) .pengantin-card { transform: translateX(80px); }
-    
-    .pengantin-card { width: 85%; margin-bottom: 2rem; }
-    
-    /* Di mobile, kurangi delay agar user tidak menunggu terlalu lama saat scroll */
-    #pengantin .col-lg-6:nth-child(2).animated .pengantin-card {
-        transition-delay: 0.3s;
+    .pengantin-name {
+        /* Ukuran di HP dibuat proporsional (tidak terlalu besar tapi tetap kebaca) */
+        font-size: 1.7rem; 
+        margin-top: 0.5rem;
+    }
+
+    .pengantin-desc {
+        font-size: 0.85rem;
+        padding: 0 10px; /* Memberi ruang agar teks tidak mepet pinggir kartu */
+    }
+
+    .pengantin-overlay {
+        /* Padding bawah ditambah sedikit agar teks tidak terlalu mepet ke bawah kartu */
+        padding: 3rem 1rem 2rem 1rem; 
     }
 }
 .card {
