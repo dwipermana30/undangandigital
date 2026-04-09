@@ -154,12 +154,14 @@ body {
 .hero-bg-img.active {
     opacity: 1;
     filter: blur(0);
-}
+    z-index: 2;
+    animation: zoomInOut 12s ease-in-out infinite; /* Durasi animasi */
 
-.hero-bg-img.active {
-    opacity: 1;
-    filter: blur(0);
-    animation: kenburns 10s ease-in-out forwards;
+}
+.hero-bg-img.exit {
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
 }
 
 @keyframes kenburns {
@@ -170,7 +172,17 @@ body {
         transform: translate(-50%, -50%) scale(1.10);
     }
 }
-
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15); /* Zoom In maksimal di tengah durasi */
+    }
+    100% {
+        transform: scale(1); /* Kembali ke normal (Zoom Out) */
+    }
+}
 .hero-text {
     position: relative;
     z-index: 10;
@@ -455,12 +467,17 @@ footer {
     }
 
     .hero-bg-img {
-        max-width: 100vw;
-        max-height: 100vh;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%) scale(1);
-        object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pastikan foto fit memenuhi bingkai */
+    opacity: 0;
+    filter: blur(15px); /* Mulai dengan blur */
+    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+    z-index: 1;
+    object-fit: cover;
     }
 
     @keyframes kenburns {
