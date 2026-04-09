@@ -8,7 +8,7 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- Hero Slideshow Logic ---
+    // --- 1. Hero Slideshow Logic ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
         const currentImg = heroBgImages[currentImageIndex];
@@ -39,6 +39,7 @@
         }, 11000);
     }
 
+    // --- 2. Buka Undangan Logic ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -48,12 +49,35 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
+                // Cek posisi scroll saat dibuka untuk animasi pengantin
+                animatePengantin();
             }, 500);
             if (music) music.play().catch(err => console.log("Music blocked"));
         });
     }
 
-    // --- Countdown Timer ---
+    // --- 3. Animasi Muncul Pengantin (Scroll Trigger) ---
+    const pengantinSection = document.getElementById("pengantin");
+    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
+
+    function animatePengantin() {
+        if (!pengantinSection || !pengantinCards.length) return;
+
+        const sectionTop = pengantinSection.getBoundingClientRect().top;
+        const triggerPoint = window.innerHeight * 0.85; // Muncul saat section 85% terlihat
+
+        if (sectionTop < triggerPoint) {
+            pengantinCards.forEach((card) => {
+                card.classList.add("animated");
+            });
+            // Hapus event listener setelah animasi jalan agar hemat baterai/performa
+            window.removeEventListener("scroll", animatePengantin);
+        }
+    }
+
+    window.addEventListener("scroll", animatePengantin);
+
+    // --- 4. Countdown Timer ---
     const weddingDate = new Date("April 26, 2026 10:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -68,7 +92,7 @@
         }
     }, 1000);
 
-    // --- Music & Gallery Logic ---
+    // --- 5. Music & Gallery Logic ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -93,11 +117,12 @@
         });
     });
 
-    // Klik Foto Pengantin (Baru)
+    // Klik Foto Pengantin (Reuse Gallery Modal)
     document.querySelectorAll('.pengantin-card[data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             const imgSrc = this.getAttribute('data-img');
             if(modalImg) modalImg.src = imgSrc;
+            // Sembunyikan navigasi karena ini bukan slideshow gallery
             if(prevBtn) prevBtn.style.display = 'none';
             if(nextBtn) nextBtn.style.display = 'none';
         });
@@ -112,7 +137,7 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
-    // Copy Rekening
+    // --- 6. Copy Rekening Logic ---
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
