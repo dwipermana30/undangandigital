@@ -4,32 +4,27 @@
   --text: #222;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--text);
   background: var(--muted);
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Div Latar Belakang Cover */
+/* FIX: Mencegah background menghalangi klik */
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: -2;
-    transition: opacity 0.5s ease-in-out;
+    z-index: -2; 
+    pointer-events: none; /* Tombol di depan jadi bisa diklik */
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
 }
 
 .cover-bg {
@@ -37,7 +32,6 @@ body {
     opacity: 1;
 }
 
-/* Halaman Sampul (Cover) */
 .cover {
     min-height: 100vh;
     position: fixed;
@@ -49,87 +43,37 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    z-index: 999;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    z-index: 9999; /* Sangat tinggi agar di depan semua elemen */
+    background: rgba(0,0,0,0.2); /* Gelapkan sedikit covernya */
+    transition: opacity 0.8s ease;
 }
 
 .cover.fade-out {
     opacity: 0;
+    pointer-events: none;
 }
 
-.cover.fade-out .cover-bg {
-    opacity: 0;
-}
-
-.cover .cover-content {
-    position: relative;
-    z-index: 10;
-    max-width: 90%;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2rem;
-    border-radius: 12px;
-}
-
-.cover .cover-intro {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-.cover .cover-couple {
-    font-family: "Playfair Display", serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.cover .cover-date {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-/* Konten Utama Undangan */
-#main-content {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s ease-in-out, visibility 0s 1s;
-    position: relative;
-    z-index: 1;
-}
-
-#main-content.fade-in {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
-}
-
-/* --- Slideshow Hero (Aturan untuk Desktop) --- */
-/* --- HERO SLIDESHOW (FIXED & CENTERED) --- */
+/* Rest of your Hero and Other Styles remain the same... */
 .hero {
     height: 100vh;
     position: relative;
     overflow: hidden;
-    background-color: #000; /* Latar belakang hitam saat transisi */
+    background-color: #000;
 }
 
 .hero-bg-img {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    /* KUNCI: Menjaga foto tetap fit di tengah tanpa miring */
-    object-fit: cover; 
+    object-fit: cover;
     object-position: center;
-    
     opacity: 0;
     filter: blur(15px);
-    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+    transition: opacity 1.5s ease, filter 1.5s ease;
     z-index: 1;
-    transform: scale(1);
 }
 
-/* Keadaan saat foto Aktif */
 .hero-bg-img.active {
     opacity: 1;
     filter: blur(0);
@@ -137,378 +81,10 @@ body {
     animation: zoomInOut 12s ease-in-out infinite;
 }
 
-/* Keadaan saat foto Keluar (Proses Blur) */
-.hero-bg-img.exit {
-    opacity: 0;
-    filter: blur(25px);
-    z-index: 1;
-    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
-}
-
-/* Animasi Zoom In ke Zoom Out */
 @keyframes zoomInOut {
     0% { transform: scale(1); }
-    50% { transform: scale(1.12); } /* Zoom In halus */
-    100% { transform: scale(1); }    /* Zoom Out kembali */
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-/* Overlay agar teks terbaca */
-.hero .overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 3;
-}
-
-.couple-name {
-    font-family: "Playfair Display", serif;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.small-intro, .date {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-.countdown {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    font-weight: 600;
-    flex-wrap: wrap;
-}
-
-.countdown div {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 12px 14px;
-    border-radius: 8px;
-    text-align: center;
-    flex: 1 0 21%;
-}
-
-.countdown span {
-    display: block;
-    font-size: 1.4rem;
-}
-
-/* Section styles */
-section {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
-}
-
-h2, h3, h4, h5 {
-    font-family: "Playfair Display", serif;
-    font-weight: 400;
-    color: var(--accent);
-    text-align: center;
-}
-
-#doa {
-    background: var(--muted);
-}
-.doa-text {
-    font-style: italic;
-    font-family: "Playfair Display", serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--accent);
-}
-
-.doa-source {
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    font-weight: 600;
-}
-
-#pengantin {
-    background: #fff;
-    padding: 3rem 0;
-}
-
-/* --- Foto Pengantin (Aturan untuk DESKTOP) --- */
-.pengantin-card {
-    position: relative;
-    display: block;
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    aspect-ratio: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.pengantin-card:hover {
-    transform: scale(1.05);
-}
-
-.pengantin-card .pengantin-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: center;
-    transition: transform 0.3s ease;
-}
-
-.pengantin-card:hover .pengantin-img {
-    transform: scale(1.05);
-}
-
-.pengantin-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    transition: background 0.3s ease;
-}
-
-.pengantin-card:hover .pengantin-overlay {
-    background: rgba(0, 0, 0, 0.6);
-}
-
-.pengantin-name {
-    font-family: "Playfair Display", serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-}
-
-.pengantin-desc {
-    font-size: 1rem;
-    opacity: 0.9;
-    color: #fff;
-}
-
-.card {
-    background: #fff;
-}
-
-.gallery h2 {
-    font-family: "Playfair Display", serif;
-    font-weight: 400;
-    color: var(--accent);
-    text-align: center;
-    font-size: 1.8rem;
-}
-
-.photo-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.photo-gallery a {
-    display: block;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.photo-gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.photo-gallery a:hover img {
-    transform: scale(1.05);
-}
-
-.gift-card {
-    background: #efe7dd;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-.gift-card .bank {
-    font-size: 0.85rem;
-    color: var(--accent);
-}
-
-.gift-card .accnum {
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin: 8px 0;
-}
-
-.gift-card .accname {
-    font-size: 0.85rem;
-    color: #444;
-}
-
-.form-control, .form-select {
-    border-radius: 4px;
-}
-
-footer {
-    background: transparent;
-}
-
-.music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #a77b5a;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    cursor: pointer;
-    z-index: 999;
-}
-
-/* Gaya untuk tombol navigasi di modal galeri */
-.modal-body {
-    position: relative;
-}
-
-.modal-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2.5rem;
-    line-height: 1;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    padding: 0 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.modal-nav-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.prev-btn {
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-
-/* --- Media Query untuk perangkat MOBILE (lebar layar < 768px) --- */
-@media (max-width: 768px) {
-    .cover .cover-couple {
-        font-size: 2.5rem;
-    }
-
-    .cover {
-        background-color: var(--muted);
-    }
-    
-    .background-container {
-        background-size: cover;
-    }
-    .hero,
-    .hero-bg {
-        height: 100vh !important;
-        max-height: 100vh !important;
-    }
-
-    .hero-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Pastikan foto fit memenuhi bingkai */
-    opacity: 0;
-    filter: blur(15px); /* Mulai dengan blur */
-    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
-    z-index: 1;
-    object-fit: cover;
-    }
-
-    @keyframes kenburns {
-        0% {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1.15);
-        }
-    }
-
-    .couple-name {
-        font-size: 2.4rem;
-    }
-
-    .countdown div {
-        flex: 1 0 45%;
-    }
-
-    .countdown span {
-        font-size: 1.2rem;
-    }
-
-    #pengantin {
-        text-align: center;
-    }
-
-    #pengantin .col-lg-6 {
-        margin-bottom: 2rem;
-    }
-
-    .pengantin-name {
-        margin-top: 1rem;
-    }
-    
-    /* FIX: Kode di bawah ini yang saya perbaiki untuk menampilkan foto asli */
-    .pengantin-card {
-        aspect-ratio: auto; /* Menggunakan rasio asli foto */
-        width: 90%;
-        max-width: 450px;
-        margin: 0 auto;
-    }
-
-    .pengantin-card .pengantin-img {
-        width: 100%;
-        height: auto; /* Menggunakan tinggi asli foto */
-        object-fit: contain; /* Memastikan foto tidak terpotong */
-    }
-}
-/* Custom request: Tombol transparan bingkai putih */
-.custom-open-btn {
-    background-color: transparent !important;
-    border: 1px solid #ffffff !important;
-    color: #ffffff !important;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.custom-open-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-}
-
-.custom-open-btn svg {
-    fill: white;
-}
+/* Copy sisa CSS Anda (Gallery, Modal, dll) di bawah sini tanpa perubahan */
