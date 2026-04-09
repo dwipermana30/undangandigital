@@ -348,14 +348,16 @@ h2, h3, h4, h5 {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transform-origin: top center; /* Engsel di atas */
+    transform-origin: top center;
     opacity: 0;
+    visibility: hidden; /* Tambahkan ini agar tidak mengganggu klik sebelum muncul */
     transform: rotateX(-90deg);
-    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 1.2s;
 }
 
 .photo-gallery a.animated {
     opacity: 1;
+    visibility: visible; /* Munculkan saat animasi jalan */
     transform: rotateX(0deg);
     animation: swingEffect 2s ease-in-out;
 }
