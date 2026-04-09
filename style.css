@@ -309,7 +309,7 @@ h2, h3, h4, h5 {
 .pengantin-name {
     font-family: "Playfair Display", serif;
     /* Ukuran desktop dinaikkan sedikit agar lebih mewah */
-    font-size: 0.9rem; 
+    font-size: 1rem; 
     font-weight: 700;
     color: #ffffff !important; /* Tetap putih bersih */
     margin-bottom: 0.2rem;
@@ -331,7 +331,7 @@ h2, h3, h4, h5 {
 @media (max-width: 768px) {
     .pengantin-name {
         /* Ukuran di HP dibuat proporsional (tidak terlalu besar tapi tetap kebaca) */
-        font-size: 0.9rem; 
+        font-size: 1rem; 
         margin-top: 0.5rem;
     }
 
