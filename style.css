@@ -413,6 +413,37 @@ h2, h3, h4, h5 {
     cursor: pointer;
     z-index: 999;
 }
+/* Pastikan container teks hero berada di atas overlay */
+.hero-content {
+    position: relative;
+    z-index: 10; 
+    text-align: center;
+}
+
+/* Gaya tombol agar bisa diklik */
+.btn-save-date {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: var(--accent);
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    
+    /* Kunci utamanya di sini: z-index harus lebih tinggi dari .overlay (3) */
+    position: relative; 
+    z-index: 99; 
+    cursor: pointer;
+}
+
+.btn-save-date:hover {
+    background-color: #5a4d3f;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
