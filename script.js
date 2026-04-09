@@ -37,7 +37,7 @@
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
             startSlideshow();
-        }, 9000); // Durasi ganti gambar
+        }, 9000); 
     }
 
     if (openBtn) {
@@ -53,14 +53,11 @@
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
             }, 800);
-            
-            if (music) {
-                music.play().catch(err => console.log("Music blocked"));
-            }
+            if (music) music.play().catch(err => console.log("Music blocked"));
         });
     }
 
-    // --- Countdown Timer ---
+    // --- COUNTDOWN TIMER ---
     const weddingDate = new Date("April 26, 2026 10:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -75,7 +72,7 @@
         }
     }, 1000);
 
-    // --- Music Toggle ---
+    // --- MUSIC & COPY REKENING ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -84,7 +81,6 @@
         });
     }
 
-    // --- Copy Rekening ---
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
