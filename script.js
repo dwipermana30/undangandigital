@@ -8,7 +8,7 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- 1. Hero Slideshow Logic ---
+    // --- 1. Hero Slideshow ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
         const currentImg = heroBgImages[currentImageIndex];
@@ -39,7 +39,23 @@
         }, 11000);
     }
 
-    // --- 2. Buka Undangan Logic ---
+    // --- 2. Scroll Trigger Individual (Pengantin) ---
+    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
+
+    function animateOnScroll() {
+        pengantinCards.forEach((card) => {
+            if (card.classList.contains("animated")) return;
+
+            const rect = card.getBoundingClientRect();
+            const triggerPoint = window.innerHeight * 0.85;
+
+            if (rect.top < triggerPoint) {
+                card.classList.add("animated");
+            }
+        });
+    }
+
+    // --- 3. Buka Undangan ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -49,35 +65,15 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
-                // Cek posisi scroll saat dibuka untuk animasi pengantin
-                animatePengantin();
+                animateOnScroll(); // Cek animasi saat terbuka
             }, 500);
             if (music) music.play().catch(err => console.log("Music blocked"));
         });
     }
 
-    // --- 3. Animasi Muncul Pengantin (Scroll Trigger) ---
-    const pengantinSection = document.getElementById("pengantin");
-    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
+    window.addEventListener("scroll", animateOnScroll);
 
-    function animatePengantin() {
-        if (!pengantinSection || !pengantinCards.length) return;
-
-        const sectionTop = pengantinSection.getBoundingClientRect().top;
-        const triggerPoint = window.innerHeight * 0.85; // Muncul saat section 85% terlihat
-
-        if (sectionTop < triggerPoint) {
-            pengantinCards.forEach((card) => {
-                card.classList.add("animated");
-            });
-            // Hapus event listener setelah animasi jalan agar hemat baterai/performa
-            window.removeEventListener("scroll", animatePengantin);
-        }
-    }
-
-    window.addEventListener("scroll", animatePengantin);
-
-    // --- 4. Countdown Timer ---
+    // --- 4. Countdown ---
     const weddingDate = new Date("April 26, 2026 10:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -107,7 +103,7 @@
     const nextBtn = document.getElementById('nextGalleryBtn');
     const prevBtn = document.getElementById('prevGalleryBtn');
 
-    // Klik Foto Galeri
+    // Gallery Click
     document.querySelectorAll('.photo-gallery [data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             currentGalleryIndex = parseInt(this.getAttribute('data-index'));
@@ -117,12 +113,11 @@
         });
     });
 
-    // Klik Foto Pengantin (Reuse Gallery Modal)
+    // Pengantin Click (Modal)
     document.querySelectorAll('.pengantin-card[data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             const imgSrc = this.getAttribute('data-img');
             if(modalImg) modalImg.src = imgSrc;
-            // Sembunyikan navigasi karena ini bukan slideshow gallery
             if(prevBtn) prevBtn.style.display = 'none';
             if(nextBtn) nextBtn.style.display = 'none';
         });
@@ -137,7 +132,7 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
-    // --- 6. Copy Rekening Logic ---
+    // --- 6. Copy Rekening ---
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
