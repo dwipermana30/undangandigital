@@ -8,7 +8,7 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- Hero Slideshow Logic (SMOOTH TRANSITION) ---
+    // --- Slideshow Logic ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
         
@@ -25,7 +25,7 @@
             nextImg.classList.add("active");
         }
 
-        // Hapus class exit setelah transisi selesai
+        // Membersihkan class exit setelah transisi selesai
         setTimeout(() => {
             heroBgImages.forEach((img, idx) => {
                 if (idx !== nextIndex) img.classList.remove("exit");
@@ -41,10 +41,10 @@
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
             startSlideshow();
-        }, 11000); // 11 detik ganti (sinkron dengan durasi animasi CSS)
+        }, 9000); // Sinkron dengan siklus zoom di CSS agar tidak melompat
     }
 
-    // --- Buka Undangan Logic (FIXED CLICK) ---
+    // --- Buka Undangan Logic ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
@@ -55,10 +55,10 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
-            }, 500);
+            }, 800);
             
             if (music) {
-                music.play().catch(err => console.log("Autoplay blocked"));
+                music.play().catch(err => console.log("Music blocked"));
             }
         });
     }
@@ -78,7 +78,7 @@
         }
     }, 1000);
 
-    // --- Music & Gallery Logic (TIDAK BERUBAH) ---
+    // --- Music Toggle ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
@@ -87,6 +87,7 @@
         });
     }
 
+    // --- Gallery & Copy (TIDAK DIUBAH) ---
     const galleryImages = ['foto1.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
@@ -114,9 +115,8 @@
             const accNum = document.querySelector('.accnum')?.textContent;
             if(accNum) {
                 navigator.clipboard.writeText(accNum).then(() => {
-                    const originalText = copyBtn.textContent;
                     copyBtn.textContent = 'Tersalin!';
-                    setTimeout(() => copyBtn.textContent = originalText, 2000);
+                    setTimeout(() => copyBtn.textContent = 'Salin No. Rekening', 2000);
                 });
             }
         });
