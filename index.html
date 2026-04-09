@@ -20,7 +20,13 @@
         <p class="cover-intro">We invite you to celebrate our wedding</p>
         <h1 class="cover-couple">Dwi & Niken</h1>
         <p class="cover-date">Rabu, 06 Mei 2026</p>
-        <button id="open-invitation-btn" class="btn btn-primary mt-4">Buka Undangan</button>
+        
+        <button id="open-invitation-btn" class="btn custom-open-btn mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope-open me-2" viewBox="0 0 16 16">
+                <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882l-6-3.2ZM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2Z"/>
+            </svg>
+            Buka Undangan
+        </button>
     </div>
 </div>
 
@@ -36,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 hero-text text-center mx-auto">
-                    <p class="small-intro">We invite you to celebrate our wedding</p>
+                    <p class="small-intro">The Wedding of</p>
                     <h1 class="couple-name">Dwi & Niken</h1>
 
                     <div class="countdown d-flex gap-3 justify-content-center mt-4" id="countdown">
@@ -65,22 +71,26 @@
         <div class="container">
             <div class="row text-center justify-content-center">
                 <div class="col-lg-6 mb-5">
-                    <a href="#" class="pengantin-card" data-bs-toggle="modal" data-bs-target="#imageModalPengantinPria">
-                        <img src="pengantin1.webp" alt="Pengantin Pria" class="pengantin-img">
-                        <div class="pengantin-overlay">
-                            <h5 class="pengantin-name">Kadek Agus Dwi Permana</h5>
-                            <p class="pengantin-desc">Putra kedua dari <br> I Ketut Dangin & Ni Nengah Arini</p>
-                        </div>
-                    </a>
+                    <div class="pengantin-card">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModalPengantinPria">
+                            <img src="pengantin1.webp" alt="Pengantin Pria" class="pengantin-img">
+                            <div class="pengantin-overlay">
+                                <h5 class="pengantin-name">Kadek Agus Dwi Permana</h5>
+                                <p class="pengantin-desc">Putra kedua dari <br> I Ketut Dangin & Ni Nengah Arini</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-6">
-                    <a href="#" class="pengantin-card" data-bs-toggle="modal" data-bs-target="#imageModalPengantinWanita">
-                        <img src="pengantin2.webp" alt="Pengantin Wanita" class="pengantin-img">
-                        <div class="pengantin-overlay">
-                            <h5 class="pengantin-name">Putu Niken Diah Prastika</h5>
-                            <p class="pengantin-desc">Putri pertama dari <br> Ketut Somedana & Ni Made Serly Marlina</p>
-                        </div>
-                    </a>
+                    <div class="pengantin-card">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModalPengantinWanita">
+                            <img src="pengantin2.webp" alt="Pengantin Wanita" class="pengantin-img">
+                            <div class="pengantin-overlay">
+                                <h5 class="pengantin-name">Putu Niken Diah Prastika</h5>
+                                <p class="pengantin-desc">Putri pertama dari <br> Ketut Somedana & Ni Made Serly Marlina</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
