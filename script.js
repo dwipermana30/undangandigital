@@ -4,6 +4,7 @@
     const mainContent = document.getElementById("main-content");
     const music = document.getElementById("bg-music");
     const heroBgImages = document.querySelectorAll(".hero-bg-img");
+    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
     
     let currentImageIndex = 0;
     let slideshowTimeout;
@@ -39,15 +40,14 @@
         }, 11000);
     }
 
-    // --- 2. Scroll Trigger Individual (Pengantin) ---
-    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
-
+    // --- 2. Logic Animasi Scroll (Individual) ---
     function animateOnScroll() {
         pengantinCards.forEach((card) => {
             if (card.classList.contains("animated")) return;
 
             const rect = card.getBoundingClientRect();
-            const triggerPoint = window.innerHeight * 0.85;
+            // Trigger aktif saat elemen 80% terlihat di layar
+            const triggerPoint = window.innerHeight * 0.8; 
 
             if (rect.top < triggerPoint) {
                 card.classList.add("animated");
@@ -65,7 +65,7 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 startSlideshow(); 
-                animateOnScroll(); // Cek animasi saat terbuka
+                animateOnScroll(); // Cek posisi saat pertama kali terbuka
             }, 500);
             if (music) music.play().catch(err => console.log("Music blocked"));
         });
@@ -73,7 +73,7 @@
 
     window.addEventListener("scroll", animateOnScroll);
 
-    // --- 4. Countdown ---
+    // --- 4. Countdown Timer ---
     const weddingDate = new Date("April 26, 2026 10:00:00").getTime();
     setInterval(() => {
         const now = new Date().getTime();
@@ -88,22 +88,14 @@
         }
     }, 1000);
 
-    // --- 5. Music & Gallery Logic ---
-    const musicBtn = document.getElementById("music-btn");
-    if (musicBtn && music) {
-        musicBtn.addEventListener("click", () => {
-            if (music.paused) { music.play(); musicBtn.textContent = "🎵"; }
-            else { music.pause(); musicBtn.textContent = "🔇"; }
-        });
-    }
-
+    // --- 5. Gallery & Modal Logic ---
     const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
     const nextBtn = document.getElementById('nextGalleryBtn');
     const prevBtn = document.getElementById('prevGalleryBtn');
 
-    // Gallery Click
+    // Klik Galeri
     document.querySelectorAll('.photo-gallery [data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             currentGalleryIndex = parseInt(this.getAttribute('data-index'));
@@ -113,7 +105,7 @@
         });
     });
 
-    // Pengantin Click (Modal)
+    // Klik Pengantin ke Modal
     document.querySelectorAll('.pengantin-card[data-bs-target="#galleryModal"]').forEach(item => {
         item.addEventListener('click', function() {
             const imgSrc = this.getAttribute('data-img');
@@ -132,7 +124,15 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
-    // --- 6. Copy Rekening ---
+    // --- 6. Music Toggle & Copy Bank ---
+    const musicBtn = document.getElementById("music-btn");
+    if (musicBtn && music) {
+        musicBtn.addEventListener("click", () => {
+            if (music.paused) { music.play(); musicBtn.textContent = "🎵"; }
+            else { music.pause(); musicBtn.textContent = "🔇"; }
+        });
+    }
+
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
         copyBtn.addEventListener('click', () => {
