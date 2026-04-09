@@ -239,35 +239,30 @@ h2, h3, h4, h5 {
     overflow: hidden; 
 }
 
-/* --- LOGIC ANIMASI (SANGAT HALUS & LAMBAT) --- */
+/* --- LOGIC ANIMASI (SLOW MOTION) --- */
 
 #pengantin .col-lg-6 .pengantin-card {
     opacity: 0;
-    /* Durasi 2.5s agar terasa premium/slow motion */
+    /* Durasi 2.5s agar sangat halus */
     transition: transform 2.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 2.5s ease-out;
     pointer-events: none;
 }
 
-/* Pengantin 1: Muncul dari Kiri */
+/* Pengantin 1: Dari Kiri */
 #pengantin .col-lg-6:nth-child(1) .pengantin-card {
     transform: translateX(-150px);
 }
 
-/* Pengantin 2: Muncul dari Kanan (Harus Positif 150px) */
+/* Pengantin 2: Dari Kanan (Nilai Positif) */
 #pengantin .col-lg-6:nth-child(2) .pengantin-card {
     transform: translateX(150px);
 }
 
-/* Saat Class 'animated' aktif (dipicu JS saat scroll) */
+/* Class 'animated' aktif saat kartu masuk ke layar */
 #pengantin .col-lg-6.animated .pengantin-card {
     opacity: 1 !important;
-    transform: translateX(0) !important; /* Kembali tepat ke tengah */
+    transform: translateX(0) !important; 
     pointer-events: auto;
-}
-
-/* Jeda sedikit agar pengantin 2 muncul setelah pengantin 1 bergerak */
-#pengantin .col-lg-6:nth-child(2).animated .pengantin-card {
-    transition-delay: 0.4s;
 }
 
 /* --- DESAIN KARTU & OVERLAY --- */
@@ -284,10 +279,16 @@ h2, h3, h4, h5 {
     cursor: pointer;
 }
 
+.pengantin-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
 .pengantin-overlay {
     position: absolute;
     inset: 0;
-    /* Gradasi hitam transparan agar teks putih terbaca */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
     display: flex;
     flex-direction: column;
@@ -298,48 +299,36 @@ h2, h3, h4, h5 {
     z-index: 5;
 }
 
-/* --- PERBAIKAN FONT (PUTIH) --- */
+/* --- TIPOGRAFI (PUTIH BERSIH) --- */
 
 .pengantin-name {
     font-family: "Playfair Display", serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffffff !important; /* Paksa jadi putih bersih */
+    color: #ffffff !important; /* Paksa warna putih */
     margin-bottom: 0.3rem;
-    letter-spacing: 1px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .pengantin-desc {
     font-size: 0.85rem;
-    color: #f0f0f0 !important; /* Putih agak pudar untuk deskripsi */
+    color: #f0f0f0 !important;
     line-height: 1.5;
-    margin-bottom: 0;
     font-weight: 300;
 }
 
-/* --- RESPONSIVE MOBILE (< 768px) --- */
+/* --- RESPONSIVE MOBILE --- */
 
 @media (max-width: 768px) {
-    /* Jarak geser dikurangi agar tidak melebihi layar HP */
     #pengantin .col-lg-6:nth-child(1) .pengantin-card {
         transform: translateX(-80px);
     }
     #pengantin .col-lg-6:nth-child(2) .pengantin-card {
         transform: translateX(80px);
     }
-
-    #pengantin .col-lg-6.animated .pengantin-card {
-        transform: translateX(0) !important;
-    }
-
-    .pengantin-name {
-        font-size: 1.5rem;
-    }
-
     .pengantin-card {
         width: 85%;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 }
 .card {
