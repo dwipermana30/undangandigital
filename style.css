@@ -104,94 +104,60 @@ body {
 }
 
 /* --- Slideshow Hero (Aturan untuk Desktop) --- */
+/* --- HERO SLIDESHOW (FIXED & CENTERED) --- */
 .hero {
     height: 100vh;
     position: relative;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-    z-index: 0;
+    background-color: #000; /* Latar belakang hitam saat transisi */
 }
 
-.hero .overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(18, 18, 18, 0.55) 0%,
-        rgba(18, 18, 18, 0.2) 60%
-    );
-    z-index: -1;
-}
-
-.hero-bg {
+.hero-bg-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
-    overflow: hidden;
-}
-
-.hero-bg-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    transform: translate(-50%, -50%) scale(1.05);
-    filter: blur(3px);
+    /* KUNCI: Menjaga foto tetap fit di tengah tanpa miring */
+    object-fit: cover; 
+    object-position: center;
+    
     opacity: 0;
-    transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out, transform 10s ease-in-out;
-    object-fit: contain;
+    filter: blur(15px);
+    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+    z-index: 1;
+    transform: scale(1);
 }
 
+/* Keadaan saat foto Aktif */
 .hero-bg-img.active {
     opacity: 1;
     filter: blur(0);
     z-index: 2;
-    animation: zoomInOut 12s ease-in-out infinite; /* Durasi animasi */
-
+    animation: zoomInOut 12s ease-in-out infinite;
 }
+
+/* Keadaan saat foto Keluar (Proses Blur) */
 .hero-bg-img.exit {
     opacity: 0;
-    filter: blur(20px);
+    filter: blur(25px);
+    z-index: 1;
     transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
 }
 
-@keyframes kenburns {
-    0% {
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1.10);
-    }
-}
+/* Animasi Zoom In ke Zoom Out */
 @keyframes zoomInOut {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15); /* Zoom In maksimal di tengah durasi */
-    }
-    100% {
-        transform: scale(1); /* Kembali ke normal (Zoom Out) */
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); } /* Zoom In halus */
+    100% { transform: scale(1); }    /* Zoom Out kembali */
 }
-.hero-text {
-    position: relative;
-    z-index: 10;
-    max-width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+/* Overlay agar teks terbaca */
+.hero .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 3;
 }
 
 .couple-name {
