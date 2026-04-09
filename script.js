@@ -69,7 +69,7 @@
     }
 
     // --- Gallery Modal Logic
-    const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
+    const galleryImages = ['foto1.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp',];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
 
