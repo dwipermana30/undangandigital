@@ -545,7 +545,39 @@ h2, h3, h4, h5 {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
+.comment-container {
+    background: rgba(255, 255, 255, 0.9) !important; /* Latar belakang putih transparan */
+    padding: 20px;
+    border-radius: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    color: #333;
+}
 
+.comment-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.comment-name {
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+}
+
+.badge-hadir {
+    font-size: 0.75rem;
+    background: #d4edda;
+    color: #155724;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.comment-text {
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     .cover .cover-couple { font-size: 3.5rem; }
