@@ -654,6 +654,27 @@ h2, h3, h4, h5 {
     width: auto;
     object-fit: contain;
 }
+/* Styling Peta */
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    position: relative;
+    height: 0;
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+#location .section-title {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 3.5rem;
+    color: var(--accent);
+}
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     /* Cover tetap Full di Mobile */
