@@ -43,16 +43,13 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ubah dari 120vh ke 100% agar pas layar */
-    color: #fff;
+    height: 100dvh; /* Menggunakan dvh (dynamic viewport height) agar pas di mobile */
     display: flex;
+    flex-direction: column; /* Pastikan arahnya kolom */
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Menjaga konten tetap di tengah secara vertikal */
+    z-index: 9999;
     text-align: center;
-    z-index: 9999; /* Sangat tinggi agar di depan */
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    pointer-events: auto; /* Pastikan area ini menangkap interaksi */
 }
 .cover.fade-out {
     opacity: 0;
@@ -61,12 +58,13 @@ body {
 .cover.fade-out .cover-bg {
     opacity: 0;
 }
+
 .cover .cover-content { 
     position: relative;
     z-index: 10001; /* Harus lebih tinggi dari cover parent */
-    width: 90%; 
+    width: 85%; 
     max-width: 600px;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 20px;
     background: rgba(0, 0, 0, 0.5); 
     backdrop-filter: blur(8px); 
@@ -116,7 +114,9 @@ body {
     position: relative;
     z-index: 1;
 }
-
+#main-content {
+    padding-top: 0;
+}
 #main-content.fade-in {
     opacity: 1;
     visibility: visible;
@@ -125,7 +125,7 @@ body {
 
 /* --- Slideshow Hero --- */
 .hero {
-    height: 100vh;
+    height: 100dvh;
     position: relative;
     color: #fff;
     display: flex;
