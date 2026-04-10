@@ -77,7 +77,7 @@ body {
         /* Efek Blur seluruh layar */
         background: rgba(0, 0, 0, 0.5); /* Gelapkan background sedikit */
         backdrop-filter: blur(8px); /* Blur menyeluruh dari atas ke bawah */
-        -webkit-backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(4px);
     }
 .cover .cover-intro, 
 .small-intro, 
@@ -653,7 +653,7 @@ h2, h3, h4, h5 {
         /* Efek Blur Menyeluruh */
         background: rgba(0, 0, 0, 0.4); 
         backdrop-filter: blur(12px);    
-        -webkit-backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(6px);
     }
 
     /* Penyesuaian gambar agar tidak gepeng/terpotong aneh */
