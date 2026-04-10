@@ -660,11 +660,6 @@ h2, h3, h4, h5 {
     padding-bottom: 56.25%; /* Rasio 16:9 */
     position: relative;
     height: 0;
-    
-    /* Tambahkan 3 baris di bawah ini untuk persiapan animasi */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1.5s ease-out; 
 }
 
 .map-responsive iframe {
