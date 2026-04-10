@@ -642,10 +642,13 @@ h2, h3, h4, h5 {
         background-size: cover !important;
     }
 
-    .cover .cover-couple {
-        font-size: 3.5rem;
-    }
-
+   .cover .cover-couple {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
     .pengantin-card {
         width: 90%;
         margin: 0 auto;
