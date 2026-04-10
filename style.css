@@ -604,6 +604,56 @@ h2, h3, h4, h5 {
     font-size: 0.95rem;
     margin-top: 5px;
 }
+.modal-body.position-relative {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style Tombol Navigasi (Elegan Abu-abu Transparan) */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(128, 128, 128, 0.3); /* Abu-abu transparan */
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+    z-index: 1055; /* Di atas gambar modal */
+    backdrop-filter: blur(4px); /* Efek blur halus */
+    -webkit-backdrop-filter: blur(4px);
+    line-height: 1;
+}
+
+.modal-nav-btn:hover {
+    background: rgba(128, 128, 128, 0.6);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Posisi Kiri */
+.prev-btn {
+    left: 20px;
+}
+
+/* Posisi Kanan */
+.next-btn {
+    right: 20px;
+}
+
+/* Penyesuaian Gambar Modal */
+#galleryModalImage {
+    max-height: 90vh;
+    width: auto;
+    object-fit: contain;
+}
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     /* Cover tetap Full di Mobile */
@@ -680,4 +730,13 @@ h2, h3, h4, h5 {
         width: 90%;
         margin: 0 auto;
     }
+.modal-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        background: rgba(0, 0, 0, 0.4); /* Lebih gelap di mobile agar kontras */
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+   }
 }
