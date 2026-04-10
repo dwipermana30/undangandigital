@@ -684,6 +684,17 @@ h2, h3, h4, h5 {
     font-size: 3.5rem;
     color: var(--accent);
 }
+.custom-open-btn {
+    position: relative;
+    z-index: 99999 !important; /* Sangat tinggi */
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+.cover-content {
+    z-index: 99998 !important;
+    pointer-events: auto !important;
+}
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     /* Cover tetap Full di Mobile */
