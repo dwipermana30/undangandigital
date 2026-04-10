@@ -78,7 +78,7 @@ body {
 .cover .cover-date, 
 .date {
     /* FIX: Menggunakan font Serif yang sama dengan detail di bawah */
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Pinyon Script", cursive;
     font-weight: 600;
     letter-spacing: 1px;
 }
