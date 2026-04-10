@@ -450,6 +450,25 @@ h2, h3, h4, h5 {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
+#details .card h5 {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 2.2rem; /* Ukuran diperbesar agar cantik seperti cover */
+    color: var(--accent);
+    margin-bottom: 0;
+}
+
+#details .card p, 
+#details .card small {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+#details hr {
+    border-top: 1px solid rgba(122, 106, 88, 0.2); /* Garis pembatas lebih halus */
+    margin: 1rem 0;
+}
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
