@@ -59,14 +59,16 @@
     }
 
     // --- 2. Scroll Trigger Logic ---
-    function animateOnScroll() {
-        const windowHeight = window.innerHeight;
+  function animateOnScroll() {
+    const windowHeight = window.innerHeight;
+
+    // Animasi Map Section
     if (mapSection && !mapSection.classList.contains("animated")) {
-    const rect = mapSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-        mapSection.style.opacity = "1";
-        mapSection.style.transform = "translateY(0)";
-        mapSection.classList.add("animated");
+        const rect = mapSection.getBoundingClientRect();
+        // Trigger sedikit lebih awal (100px dari bawah)
+        if (rect.top < windowHeight - 100) {
+            mapSection.classList.add("animated");
+        }
     }
 }
         pengantinCards.forEach((card) => {
