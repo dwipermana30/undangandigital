@@ -72,8 +72,8 @@ body {
     flex-direction: column;
     justify-content: center;
     background: rgba(0, 0, 0, 0.5); 
-    backdrop-filter: blur(8px); 
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px);
 }
 .cover .cover-intro, 
 .small-intro, 
