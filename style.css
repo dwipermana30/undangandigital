@@ -39,21 +39,21 @@ body {
 
 /* Halaman Sampul (Cover) */
 .cover {
+    min-height: 120vh;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ubah dari 120vh ke 100% agar pas layar */
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    z-index: 9999; /* Sangat tinggi agar di depan */
+    z-index: 999;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
-    pointer-events: auto; /* Pastikan area ini menangkap interaksi */
 }
+
 .cover.fade-out {
     opacity: 0;
 }
@@ -61,17 +61,19 @@ body {
 .cover.fade-out .cover-bg {
     opacity: 0;
 }
+
 .cover .cover-content { 
-    position: relative;
-    z-index: 10001; /* Harus lebih tinggi dari cover parent */
     width: 90%; 
-    max-width: 600px;
+    max-width: 600px; /* Membatasi lebar agar tetap berbentuk kotak di desktop */
+    margin: 0 auto;
     padding: 3rem;
-    border-radius: 20px;
+    border-radius: 20px; /* Memberikan lengkungan pojok di desktop */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: rgba(0, 0, 0, 0.5); 
     backdrop-filter: blur(8px); 
     -webkit-backdrop-filter: blur(8px);
-    pointer-events: auto; /* WAJIB agar tombol di dalamnya bisa diklik */
 }
 .cover .cover-intro, 
 .small-intro, 
@@ -100,12 +102,6 @@ body {
 .cover .cover-date {
     font-size: 1.3rem;
     margin-top: 1rem;
-}
-.custom-open-btn {
-    position: relative;
-    z-index: 10002;
-    pointer-events: auto !important;
-    cursor: pointer;
 }
 
 /* Konten Utama Undangan */
@@ -683,17 +679,6 @@ h2, h3, h4, h5 {
     font-family: 'Pinyon Script', cursive;
     font-size: 3.5rem;
     color: var(--accent);
-}
-.custom-open-btn {
-    position: relative;
-    z-index: 99999 !important; /* Sangat tinggi */
-    pointer-events: auto !important;
-    cursor: pointer;
-}
-
-.cover-content {
-    z-index: 99998 !important;
-    pointer-events: auto !important;
 }
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
