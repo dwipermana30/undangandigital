@@ -22,6 +22,7 @@
     const heroBgImages = document.querySelectorAll(".hero-bg-img");
     const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
     const galleryItems = document.querySelectorAll(".photo-gallery a");
+    const mapSection = document.querySelector("#location .map-responsive");
     
     let currentImageIndex = 0;
     let slideshowTimeout;
@@ -60,7 +61,14 @@
     // --- 2. Scroll Trigger Logic ---
     function animateOnScroll() {
         const windowHeight = window.innerHeight;
-
+    if (mapSection && !mapSection.classList.contains("animated")) {
+    const rect = mapSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+        mapSection.style.opacity = "1";
+        mapSection.style.transform = "translateY(0)";
+        mapSection.classList.add("animated");
+    }
+}
         pengantinCards.forEach((card) => {
             if (card.classList.contains("animated")) return;
             const rect = card.getBoundingClientRect();
