@@ -156,7 +156,7 @@ body {
     height: 100%;
     opacity: 0;
     filter: blur(8px);
-    object-fit: cover; /* Ubah dari contain ke cover agar pas atas-bawah */
+    object-fit: contain; /* Ubah dari contain ke cover agar pas atas-bawah */
     transition: opacity 2s ease-in-out, filter 2s ease-in-out;
     z-index: 1;
 }
