@@ -197,23 +197,17 @@ body {
     font-weight: 400;
     margin-bottom: 0.5rem;
     color: #ffffff !important;
-    /* Gunakan shadow stroke */
-    text-shadow: 
-        -1.5px -1.5px 0 #000,  
-         1.5px -1.5px 0 #000,
-        -1.5px  1.5px 0 #000,
-         1.5px  1.5px 0 #000;
+    /* Menghapus stroke 4 sisi, ganti dengan bayangan lembut */
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 .small-intro, .hero .date {
     font-size: 1rem;
     font-weight: 600;
     color: #ffffff !important;
-    text-shadow: 
-        -1px -1px 0 #000,  
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+    letter-spacing: 1px;
+    /* Bayangan tipis agar tetap elegan */
+    text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .countdown {
@@ -235,11 +229,7 @@ body {
 
 .countdown span, .countdown small {
     color: #ffffff !important;
-    text-shadow: 
-        -1px -1px 0 #000,  
-         1px -1px 0 #000,
-        -1px  1px 0 #000,
-         1px  1px 0 #000;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
 }
 .countdown span {
     font-size: 1.4rem;
