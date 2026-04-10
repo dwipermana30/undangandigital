@@ -469,6 +469,82 @@ h2, h3, h4, h5 {
     border-top: 1px solid rgba(122, 106, 88, 0.2); /* Garis pembatas lebih halus */
     margin: 1rem 0;
 }
+.comment-container {
+    background: rgba(0, 0, 0, 0.5); /* Hitam transparan */
+    backdrop-filter: blur(10px);    /* Efek blur kaca */
+    border-radius: 15px;
+    padding: 25px;
+    color: #fff;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    padding: 10px 0;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.comment-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.badge-hadir {
+    background-color: #5d8a5d; /* Hijau seperti digambar */
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.comment-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.comment-footer {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.reply-btn {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.comment-divider {
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
+}
+
+/* Kustomisasi tombol konfirmasi agar tidak biru standar */
+#rsvp .btn-primary {
+    background-color: #2563eb;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+}
+
+/* Scrollbar Style untuk List */
+.comment-container::-webkit-scrollbar {
+    width: 5px;
+}
+.comment-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
