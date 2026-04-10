@@ -62,17 +62,23 @@ body {
     opacity: 0;
 }
 
-.cover .cover-content {
-    position: relative;
-    z-index: 10;
-    width: 100%; /* Pastikan lebar mengikuti container */
-    max-width: 450px; /* Batasi lebar box agar tidak lebih lebar dari subjek foto */
-    background: rgba(0, 0, 0, 0.4); /* Transparansi box */
-    padding: 2.5rem 1.5rem;
-    border-radius: 15px;
-    margin: 0 15px; /* Margin aman untuk mobile */
-    backdrop-filter: blur(4px); /* Efek kaca halus */
-}
+.cover .cover-content { 
+        width: 100%; 
+        height: 100%; /* Penuh dari atas ke bawah */
+        max-width: none; /* Hilangkan batasan lebar */
+        margin: 0; /* Hilangkan margin */
+        border-radius: 0; /* Hilangkan lengkungan pojok agar kotak sempurna */
+        
+        /* Setting Flex agar teks tetap di tengah meski box penuh */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        /* Efek Blur seluruh layar */
+        background: rgba(0, 0, 0, 0.5); /* Gelapkan background sedikit */
+        backdrop-filter: blur(8px); /* Blur menyeluruh dari atas ke bawah */
+        -webkit-backdrop-filter: blur(8px);
+    }
 .cover .cover-intro, 
 .small-intro, 
 .cover .cover-date, 
@@ -618,10 +624,18 @@ h2, h3, h4, h5 {
 }
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-    .cover .cover-couple { font-size: 3.5rem; }
-    .couple-name { font-size: 3.2rem; }
-    .pengantin-name { font-size: 1.4rem; margin-top: 1rem; }
-    
+    /* Membuat container cover memenuhi seluruh layar tanpa sisa */
+    .cover { 
+        min-height: 100vh; /* Ubah dari 120vh ke 100vh agar pas di layar mobile */
+        height: 100vh;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  
     .hero-bg-img {
         max-width: 100vw;
         max-height: 100vh;
