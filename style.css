@@ -190,7 +190,6 @@ body {
     100% { transform: translate(-50%, -50%) scale(1); }
 }
 
-/* --- UPDATE FONT HERO (Pinyon Script) --- */
 .couple-name {
     font-family: 'Pinyon Script', cursive;
     font-size: 5rem;
@@ -648,6 +647,15 @@ h2, h3, h4, h5 {
     font-weight: 400;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+  .couple-name {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: #ffffff !important;
+    /* Menghapus stroke 4 sisi, ganti dengan bayangan lembut */
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.6);
 }
     .pengantin-card {
         width: 90%;
