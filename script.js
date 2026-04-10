@@ -59,16 +59,14 @@
     }
 
     // --- 2. Scroll Trigger Logic ---
-  function animateOnScroll() {
-    const windowHeight = window.innerHeight;
-
-    // Animasi Map Section
+    function animateOnScroll() {
+        const windowHeight = window.innerHeight;
     if (mapSection && !mapSection.classList.contains("animated")) {
-        const rect = mapSection.getBoundingClientRect();
-        // Trigger sedikit lebih awal (100px dari bawah)
-        if (rect.top < windowHeight - 100) {
-            mapSection.classList.add("animated");
-        }
+    const rect = mapSection.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+        mapSection.style.opacity = "1";
+        mapSection.style.transform = "translateY(0)";
+        mapSection.classList.add("animated");
     }
 }
         pengantinCards.forEach((card) => {
@@ -95,35 +93,19 @@
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
-            
-            // Efek klik tombol
-            this.innerHTML = "Memuat...";
-            this.style.opacity = "0.7";
-
-            // Tambahkan class fade-out ke cover
-            if (coverPage) coverPage.classList.add("fade-out");
+            coverPage.classList.add("fade-out");
             
             setTimeout(() => {
-                if (coverPage) coverPage.style.display = "none";
-                if (mainContent) mainContent.classList.add("fade-in");
-                
-                // Izinkan scroll kembali
+                coverPage.style.display = "none";
+                mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
-                document.documentElement.style.overflow = "auto";
                 
-                // Jalankan slideshow dan animasi
                 startSlideshow(); 
                 animateOnScroll(); 
-                
-                // Jalankan penyesuaian tinggi mobile jika ada
-                if (typeof adjustHeroHeight === "function") {
-                    adjustHeroHeight();
-                }
-            }, 600);
+            }, 500);
 
-            // Putar musik
             if (music) {
-                music.play().catch(err => console.log("Autoplay dicegah browser, musik akan diputar setelah interaksi pengguna."));
+                music.play().catch(err => console.log("Autoplay dicegah browser"));
             }
         });
     }
