@@ -244,4 +244,21 @@
             }
         });
     }
+    function adjustHeroHeight() {
+    if (window.innerWidth <= 768) {
+        const vh = window.innerHeight;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.height = `${vh}px`;
+        }
+    }
+}
+
+// Jalankan saat load dan saat buka undangan
+window.addEventListener('load', adjustHeroHeight);
+// Panggil fungsi ini juga di dalam event listener openBtn.click
+openBtn.addEventListener("click", function(e) {
+    // ... kode yang sudah ada ...
+    adjustHeroHeight(); // Tambahkan ini
+});
 })();
