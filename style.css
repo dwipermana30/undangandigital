@@ -628,14 +628,31 @@ h2, h3, h4, h5 {
     }
 
     /* Hanya di Mobile: Hero dipaksa Full Screen */
-    .hero-bg-img {
-        width: 100vw;
-        height: 100dvh;
+   .hero {
+        height: 100dvh; 
+        min-height: -webkit-fill-available;
+        overflow: hidden;
+    }
+  .hero-bg-img {
+        /* FIX: Atas-bawah pas, samping menyesuaikan */
+        width: 100%;   /* Mengikuti lebar layar */
+        height: 100%;  /* Mengikuti tinggi layar (atas-bawah pas) */
+        
+        /* Reset posisi agar tidak meloncat karena translate -50% */
+        top: 0;
+        left: 0;
+        transform: scale(1); /* Reset transform standar */
+        
         max-width: none;
         max-height: none;
-        object-fit: cover; /* Di HP penuh, di Desktop tetap contain */
+        object-fit: cover; /* Penting: Agar foto memenuhi layar tanpa distorsi */
+        object-position: center;
     }
-
+.hero-bg-img.active {
+        animation: none; /* Matikan smoothZoom di HP */
+        opacity: 1;
+        filter: blur(0);
+    }
     .background-container {
         height: 100dvh;
         background-size: cover !important;
