@@ -142,34 +142,34 @@
         </div>
     </section>
 
-    <section id="rsvp" class="py-5">
-        <div class="container">
-            <h3 class="text-center mb-4">Konfirmasi Kedatangan</h3>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <form action="https://formspree.io/f/mvgqddly" method="POST" class="p-4 border rounded shadow-sm bg-white">
-                        <div class="mb-3">
-                            <label class="form-label">Nama</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Nama Anda">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Kehadiran</label>
-                            <select name="attendance" class="form-select">
-                                <option value="hadir">Hadir</option>
-                                <option value="tidak">Tidak dapat hadir</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Pesan / Ucapan</label>
-                            <textarea name="message" rows="3" class="form-control" placeholder="Tulis ucapan..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Konfirmasi</button>
-                    </form>
-                </div>
+   <section id="rsvp" class="py-5">
+    <div class="container">
+        <h3 class="text-center mb-4">Konfirmasi Kedatangan</h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form id="rsvpForm" class="p-4 border rounded shadow-sm bg-white">
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" id="inputNama" class="form-control" required placeholder="Nama Anda">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kehadiran</label>
+                        <select id="inputHadir" class="form-select">
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak dapat hadir</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pesan / Ucapan</label>
+                        <textarea id="inputPesan" rows="3" class="form-control" placeholder="Tulis ucapan..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Konfirmasi</button>
+                </form>
             </div>
         </div>
-    </section>
-<div class="row justify-content-center mt-5">
+    </div>
+</section>
+    <div class="row justify-content-center mt-5">
     <div class="col-lg-6">
         <div class="comment-container">
             <div class="comment-item">
