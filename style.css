@@ -65,15 +65,27 @@ body {
 .cover .cover-content {
     position: relative;
     z-index: 10;
-    max-width: 90%;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2rem;
-    border-radius: 12px;
+    width: 100%; /* Pastikan lebar mengikuti container */
+    max-width: 450px; /* Batasi lebar box agar tidak lebih lebar dari subjek foto */
+    background: rgba(0, 0, 0, 0.4); /* Transparansi box */
+    padding: 2.5rem 1.5rem;
+    border-radius: 15px;
+    margin: 0 15px; /* Margin aman untuk mobile */
+    backdrop-filter: blur(4px); /* Efek kaca halus */
+}
+.cover .cover-intro, 
+.small-intro, 
+.cover .cover-date, 
+.date {
+    /* FIX: Menggunakan font Serif yang sama dengan detail di bawah */
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .cover .cover-intro {
-    font-size: 1rem;
-    opacity: 0.9;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 /* --- UPDATE FONT COVER (Pinyon Script) --- */
@@ -86,8 +98,8 @@ body {
 }
 
 .cover .cover-date {
-    font-size: 1.2rem;
-    opacity: 0.9;
+    font-size: 1.3rem;
+    margin-top: 1rem;
 }
 
 /* Konten Utama Undangan */
