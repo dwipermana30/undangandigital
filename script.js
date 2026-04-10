@@ -1,11 +1,25 @@
 (function () {
+    // --- 0. Konfigurasi & Inisialisasi Firebase ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCfVTqzeBvt5MuE-1cuuST_XfapPmwpV-s",
+        authDomain: "undangan-dwi-niken.firebaseapp.com",
+        databaseURL: "https://undangan-dwi-niken-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "undangan-dwi-niken",
+        storageBucket: "undangan-dwi-niken.firebasestorage.app",
+        messagingSenderId: "470175125544",
+        appId: "1:470175125544:web:4009100d97e64374d4251d"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // --- Elemen UI Existing ---
     const openBtn = document.getElementById("open-invitation-btn");
     const coverPage = document.querySelector(".cover");
     const mainContent = document.getElementById("main-content");
     const music = document.getElementById("bg-music");
     const heroBgImages = document.querySelectorAll(".hero-bg-img");
-    
-    // Elemen Animasi
     const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
     const galleryItems = document.querySelectorAll(".photo-gallery a");
     
@@ -43,32 +57,27 @@
         }, 11000);
     }
 
-    // --- 2. Scroll Trigger Logic (Pengantin & Galeri) ---
-   function animateOnScroll() {
-        // Ambil posisi scroll saat ini
+    // --- 2. Scroll Trigger Logic ---
+    function animateOnScroll() {
         const windowHeight = window.innerHeight;
 
-        // Animasi Pengantin
         pengantinCards.forEach((card) => {
             if (card.classList.contains("animated")) return;
             const rect = card.getBoundingClientRect();
-            // Trigger ketika elemen sudah masuk 100px ke dalam layar
             if (rect.top < windowHeight - 100) {
                 card.classList.add("animated");
             }
         });
 
-       // Animasi Galeri (Gantung)
         galleryItems.forEach((item) => {
             if (item.classList.contains("animated")) return;
             const rect = item.getBoundingClientRect();
-            // Dibuat lebih sensitif agar tidak nyangkut
             if (rect.top < windowHeight - 50) {
                 item.classList.add("animated");
             }
         });
     }
-// PENTING: Jalankan fungsi sekali saat window di-resize atau di-scroll
+
     window.addEventListener("scroll", animateOnScroll);
     window.addEventListener("resize", animateOnScroll);
     
@@ -83,7 +92,6 @@
                 mainContent.classList.add("fade-in");
                 document.body.style.overflow = "auto";
                 
-                // Jalankan fungsi setelah terbuka
                 startSlideshow(); 
                 animateOnScroll(); 
             }, 500);
@@ -93,8 +101,6 @@
             }
         });
     }
-
-    window.addEventListener("scroll", animateOnScroll);
 
     // --- 4. Countdown Timer ---
     const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
@@ -108,33 +114,81 @@
             const m = document.getElementById("mins");
             const s = document.getElementById("secs");
 
-            // Perhitungan Matematika Waktu
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-            // Update Teks (Gunakan padStart agar selalu 2 digit, misal: 09)
             if(d) d.textContent = days.toString().padStart(2, '0');
             if(h) h.textContent = hours.toString().padStart(2, '0');
             if(m) m.textContent = mins.toString().padStart(2, '0');
             if(s) s.textContent = secs.toString().padStart(2, '0');
         } else {
-            // Jika waktu sudah lewat
             const countdownContainer = document.querySelector(".countdown");
             if(countdownContainer) countdownContainer.innerHTML = "<h4>Acara Sedang Berlangsung</h4>";
             clearInterval(countdownInterval);
         }
     }, 1000);
 
-    // --- 5. Gallery Modal & Navigation ---
+    // --- 5. Logika RSVP (Firebase Realtime) ---
+    const rsvpForm = document.getElementById('rsvpForm');
+    if(rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nama = document.getElementById('inputNama').value;
+            const kehadiran = document.getElementById('inputHadir').value;
+            const pesan = document.getElementById('inputPesan').value;
+            const waktu = new Date().getTime();
+
+            const newPostRef = database.ref('ucapan').push();
+            newPostRef.set({
+                nama: nama,
+                kehadiran: kehadiran,
+                pesan: pesan,
+                waktu: waktu
+            }).then(() => {
+                rsvpForm.reset(); 
+                alert("Terima kasih, ucapan Anda telah tersimpan!");
+            }).catch((error) => {
+                console.error("Gagal menyimpan:", error);
+            });
+        });
+    }
+
+    // Tampilkan Ucapan Realtime
+    const commentContainer = document.querySelector('.comment-container');
+    if(commentContainer) {
+        database.ref('ucapan').orderByChild('waktu').on('value', (snapshot) => {
+            let html = '';
+            snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                html = `
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-name">${data.nama}</span>
+                            <span class="badge-hadir">${data.kehadiran}</span>
+                        </div>
+                        <p class="comment-text">${data.pesan}</p>
+                        <div class="comment-footer">
+                            <small>Baru saja</small>
+                            <span class="reply-btn">Reply</span>
+                        </div>
+                    </div>
+                    <hr class="comment-divider">
+                ` + html; 
+            });
+            commentContainer.innerHTML = html;
+        });
+    }
+
+    // --- 6. Gallery Modal & Navigation ---
     const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
     const nextBtn = document.getElementById('nextGalleryBtn');
     const prevBtn = document.getElementById('prevGalleryBtn');
 
-    // Klik Item Galeri
     document.querySelectorAll('.photo-gallery a').forEach((item, index) => {
         item.addEventListener('click', function() {
             currentGalleryIndex = index;
@@ -144,7 +198,6 @@
         });
     });
 
-    // Klik Foto Profil Pengantin ke Modal
     document.querySelectorAll('.pengantin-card').forEach(item => {
         item.addEventListener('click', function() {
             const imgSrc = this.getAttribute('data-img');
@@ -164,7 +217,7 @@
         if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
     });
 
-    // --- 6. Music Toggle & Copy Bank Logic ---
+    // --- 7. Music Toggle & Copy Bank Logic ---
     const musicBtn = document.getElementById("music-btn");
     if (musicBtn && music) {
         musicBtn.addEventListener("click", () => {
