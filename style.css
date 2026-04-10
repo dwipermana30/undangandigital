@@ -39,7 +39,7 @@ body {
 
 /* Halaman Sampul (Cover) */
 .cover {
-    min-height: 100vh;
+    min-height: 120vh;
     position: fixed;
     top: 0;
     left: 0;
