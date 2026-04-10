@@ -253,17 +253,23 @@
 
     const copyBtn = document.getElementById('copyBtn');
     if(copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            const accNum = document.querySelector('.accnum')?.textContent;
-            if(accNum) {
-                navigator.clipboard.writeText(accNum).then(() => {
-                    const originalText = copyBtn.textContent;
-                    copyBtn.textContent = 'Tersalin!';
-                    setTimeout(() => copyBtn.textContent = originalText, 2000);
+    copyBtn.addEventListener('click', () => {
+        const accNum = document.querySelector('.accnum')?.textContent;
+        if(accNum) {
+            navigator.clipboard.writeText(accNum).then(() => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'No. Rekening tersalin!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
                 });
-            }
-        });
-    }
+            });
+        }
+    });
+}
     function adjustHeroHeight() {
     if (window.innerWidth <= 768) {
         const vh = window.innerHeight;
