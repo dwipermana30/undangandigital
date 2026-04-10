@@ -630,26 +630,31 @@ h2, h3, h4, h5 {
         min-height: -webkit-fill-available;
         overflow: hidden;
     }
-  .hero-bg-img {
-        /* FIX: Atas-bawah pas, samping menyesuaikan */
-        width: 100%;   /* Mengikuti lebar layar */
-        height: 100%;  /* Mengikuti tinggi layar (atas-bawah pas) */
-        
-        /* Reset posisi agar tidak meloncat karena translate -50% */
-        top: 0;
-        left: 0;
-        transform: scale(1); /* Reset transform standar */
-        
-        max-width: none;
-        max-height: none;
-        object-fit: cover; /* Penting: Agar foto memenuhi layar tanpa distorsi */
-        object-position: center;
-    }
+ .hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: blur(8px);
+    object-fit: cover; 
+    object-position: center 20%; /* Fokus ke area wajah/atas foto */
+    transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+    z-index: 1;
+}
 .hero-bg-img.active {
-        animation: none; /* Matikan smoothZoom di HP */
+        /* Hapus 'animation: none', ganti dengan ini: */
+        animation: smoothZoomMobile 12s ease-in-out infinite; 
         opacity: 1;
         filter: blur(0);
     }
+  @keyframes smoothZoomMobile {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); } /* Zoom sedikit lebih besar di mobile */
+        100% { transform: scale(1); }
+    }
+}
     .background-container {
         height: 100dvh;
         background-size: cover !important;
