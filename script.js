@@ -156,9 +156,21 @@
                 pesan: pesan,
                 waktu: waktu
             }).then(() => {
-                rsvpForm.reset(); 
-                alert("Terima kasih, ucapan Anda telah tersimpan!");
-            }).catch((error) => {
+    rsvpForm.reset(); 
+    // Notifikasi Custom yang Elegan
+        Swal.fire({
+        title: 'Sukses!',
+        text: 'Terima kasih, ucapan Anda telah tersimpan.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#8d7a5f', // Warna disesuaikan dengan tema Griya Taksu
+        background: '#ffffff',
+        customClass: {
+            title: 'font-forum', // Jika ingin menyesuaikan font
+            popup: 'rounded-4'
+            }
+        });
+        }).catch((error) => {
                 console.error("Gagal menyimpan:", error);
             });
         });
