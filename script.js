@@ -10,12 +10,11 @@
         appId: "1:470175125544:web:4009100d97e64374d4251d"
     };
 
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    // --- Elemen UI ---
+    // --- Elemen UI Existing ---
     const openBtn = document.getElementById("open-invitation-btn");
     const coverPage = document.querySelector(".cover");
     const mainContent = document.getElementById("main-content");
@@ -28,15 +27,7 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- Fungsi Pembantu ---
-    function adjustHeroHeight() {
-        if (window.innerWidth <= 768) {
-            const vh = window.innerHeight;
-            const hero = document.querySelector('.hero');
-            if (hero) hero.style.height = `${vh}px`;
-        }
-    }
-
+    // --- 1. Hero Slideshow Logic ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
         const currentImg = heroBgImages[currentImageIndex];
@@ -67,82 +58,233 @@
         }, 11000);
     }
 
-    function animateOnScroll() {
-        const windowHeight = window.innerHeight;
-        if (mapSection && !mapSection.classList.contains("animated")) {
-            const rect = mapSection.getBoundingClientRect();
-            if (rect.top < windowHeight - 100) mapSection.classList.add("animated");
+    // --- 2. Scroll Trigger Logic ---
+  function animateOnScroll() {
+    const windowHeight = window.innerHeight;
+
+    // Animasi Map Section
+    if (mapSection && !mapSection.classList.contains("animated")) {
+        const rect = mapSection.getBoundingClientRect();
+        // Trigger sedikit lebih awal (100px dari bawah)
+        if (rect.top < windowHeight - 100) {
+            mapSection.classList.add("animated");
         }
-        pengantinCards.forEach((card) => {
-            const rect = card.getBoundingClientRect();
-            if (rect.top < windowHeight - 100) card.classList.add("animated");
-        });
-        galleryItems.forEach((item) => {
-            const rect = item.getBoundingClientRect();
-            if (rect.top < windowHeight - 50) item.classList.add("animated");
-        });
     }
+}
+        pengantinCards.forEach((card) => {
+            if (card.classList.contains("animated")) return;
+            const rect = card.getBoundingClientRect();
+            if (rect.top < windowHeight - 100) {
+                card.classList.add("animated");
+            }
+        });
 
-    // --- Event Utama: Buka Undangan ---
-    if (openBtn) {
-        openBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            
-            // UI Feedback
-            this.innerHTML = "Memuat...";
-            this.style.opacity = "0.7";
-
-            // Transisi Cover
-            if (coverPage) coverPage.classList.add("fade-out");
-            
-            setTimeout(() => {
-                if (coverPage) coverPage.style.display = "none";
-                if (mainContent) {
-                    mainContent.classList.add("fade-in");
-                    mainContent.style.opacity = "1";
-                    mainContent.style.visibility = "visible";
-                }
-                
-                // Aktifkan Scroll
-                document.body.style.overflow = "auto";
-                document.documentElement.style.overflow = "auto";
-                
-                // Jalankan Fitur
-                startSlideshow(); 
-                animateOnScroll(); 
-                adjustHeroHeight();
-            }, 600);
-
-            // Putar musik
-            if (music) {
-                music.play().catch(() => console.log("Musik tertunda interaksi"));
+        galleryItems.forEach((item) => {
+            if (item.classList.contains("animated")) return;
+            const rect = item.getBoundingClientRect();
+            if (rect.top < windowHeight - 50) {
+                item.classList.add("animated");
             }
         });
     }
 
-    // --- Countdown Timer ---
-    const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
-    setInterval(() => {
-        const now = new Date().getTime();
-        const diff = weddingDate - now;
-        if (diff > 0) {
-            document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("mins").textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("secs").textContent = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }
-    }, 1000);
+    window.addEventListener("scroll", animateOnScroll);
+    window.addEventListener("resize", animateOnScroll);
+    
+    // --- 3. Buka Undangan Event ---
+    if (openBtn) {
+        openBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Efek klik tombol
+            this.innerHTML = "Memuat...";
+            this.style.opacity = "0.7";
 
-    // --- RSVP & Music Logic Tetap Sama ---
-    // (Tambahkan sisa kode musik & copy bank Anda di sini)
-    const musicBtn = document.getElementById("music-btn");
-    if (musicBtn && music) {
-        musicBtn.addEventListener("click", () => {
-            if (music.paused) { music.play(); musicBtn.textContent = "🎵"; }
-            else { music.pause(); musicBtn.textContent = " Valenciana"; }
+            // Tambahkan class fade-out ke cover
+            if (coverPage) coverPage.classList.add("fade-out");
+            
+            setTimeout(() => {
+                if (coverPage) coverPage.style.display = "none";
+                if (mainContent) mainContent.classList.add("fade-in");
+                
+                // Izinkan scroll kembali
+                document.body.style.overflow = "auto";
+                document.documentElement.style.overflow = "auto";
+                
+                // Jalankan slideshow dan animasi
+                startSlideshow(); 
+                animateOnScroll(); 
+                
+                // Jalankan penyesuaian tinggi mobile jika ada
+                if (typeof adjustHeroHeight === "function") {
+                    adjustHeroHeight();
+                }
+            }, 600);
+
+            // Putar musik
+            if (music) {
+                music.play().catch(err => console.log("Autoplay dicegah browser, musik akan diputar setelah interaksi pengguna."));
+            }
         });
     }
 
-    window.addEventListener("scroll", animateOnScroll);
-    window.addEventListener("load", adjustHeroHeight);
+    // --- 4. Countdown Timer ---
+    const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+
+        if (diff > 0) {
+            const d = document.getElementById("days");
+            const h = document.getElementById("hours");
+            const m = document.getElementById("mins");
+            const s = document.getElementById("secs");
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            if(d) d.textContent = days.toString().padStart(2, '0');
+            if(h) h.textContent = hours.toString().padStart(2, '0');
+            if(m) m.textContent = mins.toString().padStart(2, '0');
+            if(s) s.textContent = secs.toString().padStart(2, '0');
+        } else {
+            const countdownContainer = document.querySelector(".countdown");
+            if(countdownContainer) countdownContainer.innerHTML = "<h4>Acara Sedang Berlangsung</h4>";
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+
+    // --- 5. Logika RSVP (Firebase Realtime) ---
+    const rsvpForm = document.getElementById('rsvpForm');
+    if(rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nama = document.getElementById('inputNama').value;
+            const kehadiran = document.getElementById('inputHadir').value;
+            const pesan = document.getElementById('inputPesan').value;
+            const waktu = new Date().getTime();
+
+            const newPostRef = database.ref('ucapan').push();
+            newPostRef.set({
+                nama: nama,
+                kehadiran: kehadiran,
+                pesan: pesan,
+                waktu: waktu
+            }).then(() => {
+                rsvpForm.reset(); 
+                alert("Terima kasih, ucapan Anda telah tersimpan!");
+            }).catch((error) => {
+                console.error("Gagal menyimpan:", error);
+            });
+        });
+    }
+
+    // Tampilkan Ucapan Realtime
+    const commentContainer = document.querySelector('.comment-container');
+    if(commentContainer) {
+        database.ref('ucapan').orderByChild('waktu').on('value', (snapshot) => {
+            let html = '';
+            snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                html = `
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-name">${data.nama}</span>
+                            <span class="badge-hadir">${data.kehadiran}</span>
+                        </div>
+                        <p class="comment-text">${data.pesan}</p>
+                        <div class="comment-footer">
+                            <small>Baru saja</small>
+                            <span class="reply-btn">Reply</span>
+                        </div>
+                    </div>
+                    <hr class="comment-divider">
+                ` + html; 
+            });
+            commentContainer.innerHTML = html;
+        });
+    }
+
+    // --- 6. Gallery Modal & Navigation ---
+    const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
+    let currentGalleryIndex = 0;
+    const modalImg = document.getElementById('galleryModalImage');
+    const nextBtn = document.getElementById('nextGalleryBtn');
+    const prevBtn = document.getElementById('prevGalleryBtn');
+
+    document.querySelectorAll('.photo-gallery a').forEach((item, index) => {
+        item.addEventListener('click', function() {
+            currentGalleryIndex = index;
+            if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+            if(prevBtn) prevBtn.style.display = 'block';
+            if(nextBtn) nextBtn.style.display = 'block';
+        });
+    });
+
+    document.querySelectorAll('.pengantin-card').forEach(item => {
+        item.addEventListener('click', function() {
+            const imgSrc = this.getAttribute('data-img');
+            if(modalImg) modalImg.src = imgSrc;
+            if(prevBtn) prevBtn.style.display = 'none';
+            if(nextBtn) nextBtn.style.display = 'none';
+        });
+    });
+
+    if(nextBtn) nextBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
+
+    if(prevBtn) prevBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
+
+    // --- 7. Music Toggle & Copy Bank Logic ---
+    const musicBtn = document.getElementById("music-btn");
+    if (musicBtn && music) {
+        musicBtn.addEventListener("click", () => {
+            if (music.paused) { 
+                music.play(); 
+                musicBtn.textContent = "🎵"; 
+            } else { 
+                music.pause(); 
+                musicBtn.textContent = "🔇"; 
+            }
+        });
+    }
+
+    const copyBtn = document.getElementById('copyBtn');
+    if(copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const accNum = document.querySelector('.accnum')?.textContent;
+            if(accNum) {
+                navigator.clipboard.writeText(accNum).then(() => {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Tersalin!';
+                    setTimeout(() => copyBtn.textContent = originalText, 2000);
+                });
+            }
+        });
+    }
+    function adjustHeroHeight() {
+    if (window.innerWidth <= 768) {
+        const vh = window.innerHeight;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.height = `${vh}px`;
+        }
+    }
+}
+
+// Jalankan saat load dan saat buka undangan
+window.addEventListener('load', adjustHeroHeight);
+// Panggil fungsi ini juga di dalam event listener openBtn.click
+openBtn.addEventListener("click", function(e) {
+    // ... kode yang sudah ada ...
+    adjustHeroHeight(); // Tambahkan ini
+});
 })();
