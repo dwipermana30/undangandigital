@@ -594,7 +594,7 @@ h2, h3, h4, h5 {
 @media (max-width: 768px) {
     .cover .cover-couple { font-size: 3.5rem; }
     .couple-name { font-size: 3.2rem; }
-    .pengantin-name { font-size: 2.8rem; margin-top: 1rem; }
+    .pengantin-name { font-size: 1.8rem; margin-top: 1rem; }
     
     .hero-bg-img {
         max-width: 100vw;
