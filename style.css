@@ -625,17 +625,43 @@ h2, h3, h4, h5 {
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     /* Membuat container cover memenuhi seluruh layar tanpa sisa */
+    @media (max-width: 768px) {
+    /* Memastikan container luar mengunci layar penuh */
     .cover { 
-        min-height: 100vh; /* Ubah dari 120vh ke 100vh agar pas di layar mobile */
-        height: 100vh;
+        min-height: 100dvh; 
+        height: 100dvh;
         width: 100%;
         padding: 0;
         margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
     }
-  
+
+    /* Memaksa bingkai hitam/blur memenuhi layar dari ujung ke ujung */
+    .cover .cover-content { 
+        width: 100vw; 
+        height: 100dvh; 
+        max-width: none; 
+        margin: 0; 
+        border-radius: 0; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        /* Efek Blur Menyeluruh */
+        background: rgba(0, 0, 0, 0.4); 
+        backdrop-filter: blur(12px);    
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Penyesuaian gambar agar tidak gepeng/terpotong aneh */
+    .background-container {
+        height: 100dvh;
+        background-size: cover !important;
+    }
+
     .hero-bg-img {
         max-width: 100vw;
         max-height: 100vh;
@@ -643,7 +669,10 @@ h2, h3, h4, h5 {
         height: 100%;
         object-fit: cover;
     }
-
+    /* Penyesuaian ukuran font di layar kecil */
+    .cover .cover-couple {
+        font-size: 3.5rem;
+    }
     .pengantin-card {
         width: 90%;
         margin: 0 auto;
