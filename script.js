@@ -95,19 +95,35 @@
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
             e.preventDefault();
-            coverPage.classList.add("fade-out");
+            
+            // Efek klik tombol
+            this.innerHTML = "Memuat...";
+            this.style.opacity = "0.7";
+
+            // Tambahkan class fade-out ke cover
+            if (coverPage) coverPage.classList.add("fade-out");
             
             setTimeout(() => {
-                coverPage.style.display = "none";
-                mainContent.classList.add("fade-in");
-                document.body.style.overflow = "auto";
+                if (coverPage) coverPage.style.display = "none";
+                if (mainContent) mainContent.classList.add("fade-in");
                 
+                // Izinkan scroll kembali
+                document.body.style.overflow = "auto";
+                document.documentElement.style.overflow = "auto";
+                
+                // Jalankan slideshow dan animasi
                 startSlideshow(); 
                 animateOnScroll(); 
-            }, 500);
+                
+                // Jalankan penyesuaian tinggi mobile jika ada
+                if (typeof adjustHeroHeight === "function") {
+                    adjustHeroHeight();
+                }
+            }, 600);
 
+            // Putar musik
             if (music) {
-                music.play().catch(err => console.log("Autoplay dicegah browser"));
+                music.play().catch(err => console.log("Autoplay dicegah browser, musik akan diputar setelah interaksi pengguna."));
             }
         });
     }
