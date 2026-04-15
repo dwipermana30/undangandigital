@@ -70,7 +70,14 @@
     // --- 2. Scroll Trigger Logic ---
     function animateOnScroll() {
         const windowHeight = window.innerHeight;
-    if (mapSection && !mapSection.classList.contains("animated")) {
+    const revealElements = document.querySelectorAll(".reveal");
+    revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight - 50) {
+            el.classList.add("active");
+        }
+    });
+        if (mapSection && !mapSection.classList.contains("animated")) {
     const rect = mapSection.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
         mapSection.style.opacity = "1";
