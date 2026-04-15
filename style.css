@@ -837,76 +837,72 @@ h2, h3, h4, h5 {
     .next-btn { right: 10px; }
 }
 
-/* --- KHUSUS SMALL MOBILE (OPTIMASI TANGGAL GAMBAR 2) --- */
+/* --- KHUSUS SMALL MOBILE (OPTIMASI TANGGAL) --- */
 @media (max-width: 576px) {
     .date-main { font-size: 3.5rem; }
     .date-side { font-size: 1rem; letter-spacing: 2px; }
     .loc-name { font-size: 1.2rem; }
 }
 
-/* --- KEYFRAMES (DI LUAR MEDIA QUERY AGAR TERBACA GLOBAL) --- */
-@keyframes smoothZoomMobile {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); } 
-    100% { transform: scale(1); }
+/* --- KHUSUS MOBILE (Latar Belakang Foto 10) --- */
+/* Media query ini harus berdiri sendiri, tidak boleh di dalam media query lain */
+@media (max-width: 767px) {
+    .doa-mobile-bg {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        aspect-ratio: 4 / 5; 
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        
+        padding: 30px;
+        color: #ffffff !important;
+        border-radius: 15px;
+        margin: 0 auto;
+    }
+
+    .doa-mobile-bg .doa-text {
+        color: #ffffff !important;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        font-size: 1.2rem;
+    }
 }
-/* Pengaturan khusus Desktop */
+
+/* --- KHUSUS DESKTOP (Layar Lebar) --- */
 @media (min-width: 992px) {
-    /* Memperbesar teks jam (misal: 08.00 - 10.20) */
     .time-box p {
-        font-size: 1.5rem !important; /* Sesuaikan ukuran sesuai selera */
+        font-size: 1.5rem !important;
         font-weight: 600;
         margin-bottom: 0.2rem;
     }
 
-    /* Memperbesar judul acara (Natab & Resepsi) */
     .time-box h5 {
         font-size: 2rem !important;
         margin-bottom: 0.5rem;
     }
 
-    /* Memperbesar tulisan WITA */
     .time-box p:last-child {
         font-size: 1.1rem !important;
         letter-spacing: 2px;
     }
 
-    /* Menyesuaikan jarak antar kotak agar tidak terlalu rapat di layar lebar */
     .time-row {
         gap: 30px;
     }
-  /* Container doa default (Desktop) */
-.doa-mobile-bg {
-    padding: 20px;
-    background: transparent;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
 
-/* KHUSUS MOBILE (Layar di bawah 768px) */
-@media (max-width: 767px) {
+    /* Di desktop, kita pastikan background foto hilang */
     .doa-mobile-bg {
-        /* Menggunakan foto9.webp sebagai background */
-        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
-        background-size: cover;
-        background-position: center;
-        
-        /* Menyesuaikan ukuran box teks agar proporsional seperti foto */
-        aspect-ratio: 4 / 5; /* Membuat kotaknya seukuran foto portrait pada umumnya */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        
-        /* Estetika Teks agar terbaca di atas foto */
-        padding: 30px;
-        color: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .doa-mobile-bg .doa-text {
-        color: #ffffff !important;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-        font-size: 1.2rem; /* Sedikit dikecilkan agar muat di dalam box */
+        background: transparent !important;
+        padding: 20px;
     }
 }
+
+/* --- KEYFRAMES (Global) --- */
+@keyframes smoothZoomMobile {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); } 
+    100% { transform: scale(1); }
 }
