@@ -58,45 +58,47 @@
         }, 11000);
     }
 
-    // --- 2. Scroll Trigger Logic ---
-    function animateOnScroll() {
-        const windowHeight = window.innerHeight;
-        function animateOnScroll() {
+   // --- 2. Scroll Trigger Logic ---
+function animateOnScroll() {
     const windowHeight = window.innerHeight;
     const revealElements = document.querySelectorAll(".reveal");
 
+    // Efek Reveal Tanggal
     revealElements.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        // Jika elemen sudah masuk ke area pandang (viewport)
         if (rect.top < windowHeight - 50) {
             el.classList.add("active");
         }
     });
+
+    // Efek Animasi Map
     if (mapSection && !mapSection.classList.contains("animated")) {
-    const rect = mapSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-        mapSection.style.opacity = "1";
-        mapSection.style.transform = "translateY(0)";
-        mapSection.classList.add("animated");
+        const rect = mapSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            mapSection.style.opacity = "1";
+            mapSection.style.transform = "translateY(0)";
+            mapSection.classList.add("animated");
+        }
     }
+
+    // Efek Animasi Kartu Pengantin
+    pengantinCards.forEach((card) => {
+        if (card.classList.contains("animated")) return;
+        const rect = card.getBoundingClientRect();
+        if (rect.top < windowHeight - 100) {
+            card.classList.add("animated");
+        }
+    });
+
+    // Efek Animasi Gallery
+    galleryItems.forEach((item) => {
+        if (item.classList.contains("animated")) return;
+        const rect = item.getBoundingClientRect();
+        if (rect.top < windowHeight - 50) {
+            item.classList.add("animated");
+        }
+    });
 }
-        pengantinCards.forEach((card) => {
-            if (card.classList.contains("animated")) return;
-            const rect = card.getBoundingClientRect();
-            if (rect.top < windowHeight - 100) {
-                card.classList.add("animated");
-            }
-        });
-
-        galleryItems.forEach((item) => {
-            if (item.classList.contains("animated")) return;
-            const rect = item.getBoundingClientRect();
-            if (rect.top < windowHeight - 50) {
-                item.classList.add("animated");
-            }
-        });
-    }
-
     window.addEventListener("scroll", animateOnScroll);
     window.addEventListener("resize", animateOnScroll);
     
