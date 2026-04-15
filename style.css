@@ -842,7 +842,83 @@ h2, h3, h4, h5 {
         margin-bottom: 15px;
     }
 }
+/* --- SECTION UCAPAN (POLOS) --- */
+#ucapan {
+    background-color: var(--muted);
+    padding: 80px 20px;
+    position: relative;
+    z-index: 1;
+}
 
+.weda-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--accent);
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.weda-source {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: block;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 15px;
+}
+
+/* --- SECTION DOA (FOTO PENUH) --- */
+#doa {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.doa-mobile-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    min-height: 80vh;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    color: #ffffff !important;
+    padding: 40px 20px;
+}
+
+/* Gaya Teks di Dalam Foto */
+.doa-text-top {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 3rem;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.doa-text-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Penyesuaian Mobile */
+@media (max-width: 767px) {
+    .doa-text-top { font-size: 2.5rem; }
+    .weda-text { font-size: 1.15rem; }
+}
 /* --- KHUSUS SMALL MOBILE (OPTIMASI TANGGAL) --- */
 @media (max-width: 576px) {
     .date-main { font-size: 3.5rem; }
