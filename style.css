@@ -850,3 +850,29 @@ h2, h3, h4, h5 {
     50% { transform: scale(1.15); } 
     100% { transform: scale(1); }
 }
+/* Pengaturan khusus Desktop */
+@media (min-width: 992px) {
+    /* Memperbesar teks jam (misal: 08.00 - 10.20) */
+    .time-box p {
+        font-size: 1.5rem !important; /* Sesuaikan ukuran sesuai selera */
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+
+    /* Memperbesar judul acara (Natab & Resepsi) */
+    .time-box h5 {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Memperbesar tulisan WITA */
+    .time-box p:last-child {
+        font-size: 1.1rem !important;
+        letter-spacing: 2px;
+    }
+
+    /* Menyesuaikan jarak antar kotak agar tidak terlalu rapat di layar lebar */
+    .time-row {
+        gap: 30px;
+    }
+}
