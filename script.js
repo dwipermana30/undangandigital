@@ -28,27 +28,36 @@
     let slideshowTimeout;
 
     // --- 1. Hero Slideshow Logic ---
-    function showImage(nextIndex) {
-        if (!heroBgImages.length) return;
-        const currentImg = heroBgImages[currentImageIndex];
-        const nextImg = heroBgImages[nextIndex];
+   function showImage(nextIndex) {
+    if (!heroBgImages.length) return;
+    
+    const currentImg = heroBgImages[currentImageIndex];
+    const nextImg = heroBgImages[nextIndex];
 
-        if (currentImg) {
-            currentImg.classList.remove("active");
-            currentImg.classList.add("exit");
-        }
-        if (nextImg) {
-            nextImg.classList.remove("exit");
-            nextImg.classList.add("active");
-        }
-        setTimeout(() => {
-            heroBgImages.forEach((img, idx) => {
-                if (idx !== nextIndex) img.classList.remove("exit");
-            });
-        }, 2000);
-        currentImageIndex = nextIndex;
+    // Reset semua z-index ke dasar
+    heroBgImages.forEach(img => img.style.zIndex = "1");
+
+    if (currentImg) {
+        currentImg.style.zIndex = "2"; // Foto lama tetap di atas sebentar sambil memudar
+        currentImg.classList.remove("active");
+        currentImg.classList.add("exit");
+    }
+    
+    if (nextImg) {
+        nextImg.style.zIndex = "3"; // Foto baru muncul di lapisan paling depan
+        nextImg.classList.remove("exit");
+        nextImg.classList.add("active");
     }
 
+    // Hapus class exit hanya setelah animasi benar-benar selesai (2.5 detik)
+    setTimeout(() => {
+        heroBgImages.forEach((img, idx) => {
+            if (idx !== nextIndex) img.classList.remove("exit");
+        });
+    }, 2500); 
+
+    currentImageIndex = nextIndex;
+}
     function startSlideshow() {
         clearTimeout(slideshowTimeout);
         slideshowTimeout = setTimeout(() => {
@@ -92,17 +101,20 @@
     // --- 3. Buka Undangan Event ---
     if (openBtn) {
         openBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            coverPage.classList.add("fade-out");
-            
-            setTimeout(() => {
-                coverPage.style.display = "none";
-                mainContent.classList.add("fade-in");
-                document.body.style.overflow = "auto";
-                
-                startSlideshow(); 
-                animateOnScroll(); 
-            }, 500);
+    e.preventDefault();
+    coverPage.classList.add("fade-out");
+    
+    // TAMBAHKAN INI TEPAT DI SINI
+    adjustHeroHeight(); 
+    
+    setTimeout(() => {
+        coverPage.style.display = "none";
+        mainContent.classList.add("fade-in");
+        document.body.style.overflow = "auto";
+        
+        startSlideshow(); 
+        animateOnScroll(); 
+    }, 500);
 
             if (music) {
                 music.play().catch(err => console.log("Autoplay dicegah browser"));
