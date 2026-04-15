@@ -80,7 +80,7 @@ body {
 .cover .cover-date, 
 .date {
     /* FIX: Menggunakan font Serif yang sama dengan detail di bawah */
-    font-family: "Pinyon Script", cursive;
+    font-family: 'forum', serif;
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -92,7 +92,7 @@ body {
 
 /* --- UPDATE FONT COVER (Pinyon Script) --- */
 .cover .cover-couple {
-    font-family: 'Pinyon Script', cursive;
+    font-family: 'forum', serif;
     font-size: 5rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
