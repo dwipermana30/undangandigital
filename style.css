@@ -765,7 +765,27 @@ h2, h3, h4, h5 {
 .reveal:nth-child(2) { transition-delay: 0.3s; }
 /* Elemen ketiga (Waktu Natab & Resepsi) */
 .reveal:nth-child(3) { transition-delay: 0.5s; }
+/* --- PERBAIKAN BACKGROUND PENGANTIN --- */
+#pengantin.bg-muted {
+    background-color: var(--muted) !important; /* Memastikan warna Cream */
+}
 
+.pengantin-card {
+    background-color: transparent !important; /* Menghilangkan background putih pada kartu */
+    border: none !important;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Shadow tipis agar tetap elegan */
+}
+
+.pengantin-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Jika foto memiliki background putih bawaan, tambahkan mix-blend-mode (opsional) */
+    /* mix-blend-mode: multiply; */
+}
 /* --- RESPONSIVE MOBILE (General) --- */
 @media (max-width: 768px) {
     .cover { 
