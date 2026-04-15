@@ -875,4 +875,38 @@ h2, h3, h4, h5 {
     .time-row {
         gap: 30px;
     }
+  /* Container doa default (Desktop) */
+.doa-mobile-bg {
+    padding: 20px;
+    background: transparent;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+/* KHUSUS MOBILE (Layar di bawah 768px) */
+@media (max-width: 767px) {
+    .doa-mobile-bg {
+        /* Menggunakan foto9.webp sebagai background */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
+        background-size: cover;
+        background-position: center;
+        
+        /* Menyesuaikan ukuran box teks agar proporsional seperti foto */
+        aspect-ratio: 4 / 5; /* Membuat kotaknya seukuran foto portrait pada umumnya */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        /* Estetika Teks agar terbaca di atas foto */
+        padding: 30px;
+        color: #ffffff !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .doa-mobile-bg .doa-text {
+        color: #ffffff !important;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        font-size: 1.2rem; /* Sedikit dikecilkan agar muat di dalam box */
+    }
+}
 }
