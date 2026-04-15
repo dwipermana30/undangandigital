@@ -24,7 +24,7 @@ overflow: hidden;
     height: 100%;
     opacity: 0;
     filter: blur(8px);
-    object-fit: cover; 
+    object-fit: contain; 
     object-position: center 20%; /* Fokus ke area wajah/atas foto */
     transition: opacity 2s ease-in-out, filter 2s ease-in-out;
     z-index: 1;
