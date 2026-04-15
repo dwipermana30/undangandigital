@@ -746,6 +746,26 @@ h2, h3, h4, h5 {
     font-size: 3.5rem;
     color: var(--accent);
 }
+/* --- Animation on Scroll (Reveal) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Jarak kemunculan dari bawah */
+    transition: all 0.8s ease-out; /* Durasi animasi */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efek muncul bergantian (Staggered) */
+/* Elemen pertama (Teks pembuka) */
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+/* Elemen kedua (Angka tanggal 06) */
+.reveal:nth-child(2) { transition-delay: 0.3s; }
+/* Elemen ketiga (Waktu Natab & Resepsi) */
+.reveal:nth-child(3) { transition-delay: 0.5s; }
+
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
     .cover { 
