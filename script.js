@@ -61,6 +61,17 @@
     // --- 2. Scroll Trigger Logic ---
     function animateOnScroll() {
         const windowHeight = window.innerHeight;
+        function animateOnScroll() {
+    const windowHeight = window.innerHeight;
+    const revealElements = document.querySelectorAll(".reveal");
+
+    revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        // Jika elemen sudah masuk ke area pandang (viewport)
+        if (rect.top < windowHeight - 50) {
+            el.classList.add("active");
+        }
+    });
     if (mapSection && !mapSection.classList.contains("animated")) {
     const rect = mapSection.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
