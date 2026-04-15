@@ -156,7 +156,12 @@ body {
     height: 100%;
     opacity: 0;
     filter: blur(8px);
-    object-fit: contain; /* Ubah dari contain ke cover agar pas atas-bawah */
+    object-fit: cover;
+    object-position: center 20%;
+    /* TAMBAHKAN DUA BARIS DI BAWAH INI */
+    will-change: opacity, filter, transform;
+    backface-visibility: hidden; 
+    
     transition: opacity 2s ease-in-out, filter 2s ease-in-out;
     z-index: 1;
 }
