@@ -156,7 +156,7 @@ body {
     height: 100%;
     opacity: 0;
     filter: blur(8px);
-    object-fit: cover;
+    object-fit: contain;
     object-position: center 20%;
     /* TAMBAHKAN DUA BARIS DI BAWAH INI */
     will-change: opacity, filter, transform;
