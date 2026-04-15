@@ -854,21 +854,31 @@ h2, h3, h4, h5 {
     }
 }
 
-/* --- KHUSUS MOBILE (Latar Belakang Foto Doa) --- */
 @media (max-width: 767px) {
     .doa-mobile-bg {
+        /* Ganti foto10.webp dengan foto yang ingin Anda buat penuh */
         background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        aspect-ratio: 4 / 5; 
+        
+        width: 100vw;       /* Lebar penuh sesuai layar HP */
+        margin-left: 0;      /* Pastikan tidak ada margin */
+        margin-right: 0;
+        border-radius: 0;    /* Hapus lengkungan agar benar-benar penuh ke pojok */
+        
+        min-height: 80vh;    /* Tinggi foto (bisa disesuaikan) */
         display: flex !important;
         flex-direction: column;
         justify-content: center;
-        padding: 30px;
+        padding: 40px 20px;  /* Jarak teks ke pinggir foto */
         color: #ffffff !important;
-        border-radius: 15px;
-        margin: 0 auto;
+    }
+
+    /* Hilangkan padding dari section induk agar tidak menjepit gambar */
+    #doa {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     .doa-mobile-bg .doa-text {
