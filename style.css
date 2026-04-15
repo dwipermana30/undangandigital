@@ -162,7 +162,13 @@ body {
     will-change: opacity, filter, transform;
     backface-visibility: hidden; 
     
-    transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out;
+    will-change: opacity, filter;
+    transform: translateZ(0); /* Memaksa Hardware Acceleration */
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
     z-index: 1;
 }
 .text-stroke-black {
