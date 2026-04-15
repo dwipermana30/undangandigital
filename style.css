@@ -212,29 +212,46 @@ body {
 }
 
 .countdown {
-    margin-top: 1.5rem;
+    margin-top: 0; /* Menghilangkan jarak atas karena teks sudah dihapus */
     display: flex;
     justify-content: center;
     gap: 1rem;
-    font-weight: 600;
     flex-wrap: wrap;
 }
 
 .countdown div {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 12px 14px;
-    border-radius: 8px;
+    /* Mengubah background agar lebih kontras di atas foto slideshow */
+    background: rgba(0, 0, 0, 0.45) !important; 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    padding: 15px 12px;
+    border-radius: 12px;
     text-align: center;
+    min-width: 80px;
     flex: 1 0 21%;
+    transition: transform 0.3s ease;
 }
-
-.countdown span, .countdown small {
+  .countdown span {
+    font-size: 1.8rem; /* Ukuran angka diperbesar */
+    font-weight: 700;
     color: #ffffff !important;
-    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+    display: block;
+    line-height: 1;
+    text-shadow: none; /* Menghapus shadow agar lebih clean karena sudah ada box gelap */
 }
 .countdown span {
     font-size: 1.4rem;
     font-weight: 700;
+}
+.countdown small {
+    font-size: 0.7rem;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    text-shadow: none;
 }
 section {
     padding-top: 3.5rem;
@@ -510,17 +527,17 @@ h2, h3, h4, h5 {
     cursor: pointer;
     z-index: 999;
 }
-/* Pastikan container teks hero berada di atas overlay */
 .hero-content {
     position: relative;
     z-index: 10; 
     text-align: center;
+    padding-top: 15vh; /* Tambahkan ini agar posisi box tidak terlalu nempel ke atas */
 }
 
 /* Gaya tombol agar bisa diklik */
 .btn-save-date {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 3rem !important;
     padding: 10px 28px;
     
     /* Membuat background transparan dan bingkai putih */
