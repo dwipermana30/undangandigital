@@ -748,7 +748,6 @@ h2, h3, h4, h5 {
 }
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-    /* Cover tetap Full di Mobile */
     .cover { 
         min-height: 100dvh; 
         height: 100dvh;
@@ -766,69 +765,68 @@ h2, h3, h4, h5 {
         -webkit-backdrop-filter: blur(4px);
     }
 
-    /* Hanya di Mobile: Hero dipaksa Full Screen */
-   .hero {
+    .hero {
         height: 100dvh; 
         min-height: -webkit-fill-available;
         overflow: hidden;
     }
- .hero-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    filter: blur(8px);
-    object-fit: cover; 
-    object-position: center 20%; /* Fokus ke area wajah/atas foto */
-    transition: opacity 2s ease-in-out, filter 2s ease-in-out;
-    z-index: 1;
-}
-.hero-bg-img.active {
-        /* Hapus 'animation: none', ganti dengan ini: */
+
+    .hero-bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        filter: blur(8px);
+        object-fit: cover; 
+        object-position: center 20%; 
+        transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+        z-index: 1;
+    }
+
+    .hero-bg-img.active {
         animation: smoothZoomMobile 12s ease-in-out infinite; 
         opacity: 1;
         filter: blur(0);
     }
-  @keyframes smoothZoomMobile {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.15); } /* Zoom sedikit lebih besar di mobile */
-        100% { transform: scale(1); }
-    }
-}
+
     .background-container {
         height: 100dvh;
         background-size: cover !important;
     }
 
-   .cover .cover-couple {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 3rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-}
-  .couple-name {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 3rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    color: #ffffff !important;
-    /* Menghapus stroke 4 sisi, ganti dengan bayangan lembut */
-    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.6);
-}
+    .cover .cover-couple, 
+    .couple-name {
+        font-size: 3rem;
+    }
+
     .pengantin-card {
         width: 90%;
         margin: 0 auto;
     }
-.modal-nav-btn {
+
+    .modal-nav-btn {
         width: 40px;
         height: 40px;
         font-size: 1.5rem;
-        background: rgba(0, 0, 0, 0.4); /* Lebih gelap di mobile agar kontras */
+        background: rgba(0, 0, 0, 0.4); 
     }
+    
     .prev-btn { left: 10px; }
     .next-btn { right: 10px; }
-   }
+}
+
+/* --- KHUSUS SMALL MOBILE (OPTIMASI TANGGAL GAMBAR 2) --- */
+@media (max-width: 576px) {
+    .date-main { font-size: 3.5rem; }
+    .date-side { font-size: 1rem; letter-spacing: 2px; }
+    .loc-name { font-size: 1.2rem; }
+}
+
+/* --- KEYFRAMES (DI LUAR MEDIA QUERY AGAR TERBACA GLOBAL) --- */
+@keyframes smoothZoomMobile {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); } 
+    100% { transform: scale(1); }
 }
