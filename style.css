@@ -766,7 +766,7 @@ h2, h3, h4, h5 {
 /* Elemen ketiga (Waktu Natab & Resepsi) */
 .reveal:nth-child(3) { transition-delay: 0.5s; }
 
-/* --- RESPONSIVE MOBILE --- */
+/* --- RESPONSIVE MOBILE (General) --- */
 @media (max-width: 768px) {
     .cover { 
         min-height: 100dvh; 
@@ -835,6 +835,12 @@ h2, h3, h4, h5 {
     
     .prev-btn { left: 10px; }
     .next-btn { right: 10px; }
+
+    /* Penyesuaian Map agar tombol navigasi tidak tertutup */
+    .map-responsive {
+        height: 350px; /* Tinggi yang ideal untuk HP */
+        margin-bottom: 15px;
+    }
 }
 
 /* --- KHUSUS SMALL MOBILE (OPTIMASI TANGGAL) --- */
@@ -842,22 +848,23 @@ h2, h3, h4, h5 {
     .date-main { font-size: 3.5rem; }
     .date-side { font-size: 1rem; letter-spacing: 2px; }
     .loc-name { font-size: 1.2rem; }
+    
+    .map-responsive {
+        height: 280px; /* Lebih pendek untuk layar sangat kecil */
+    }
 }
 
-/* --- KHUSUS MOBILE (Latar Belakang Foto 10) --- */
-/* Media query ini harus berdiri sendiri, tidak boleh di dalam media query lain */
+/* --- KHUSUS MOBILE (Latar Belakang Foto Doa) --- */
 @media (max-width: 767px) {
     .doa-mobile-bg {
         background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("foto10.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        
         aspect-ratio: 4 / 5; 
         display: flex !important;
         flex-direction: column;
         justify-content: center;
-        
         padding: 30px;
         color: #ffffff !important;
         border-radius: 15px;
@@ -870,24 +877,7 @@ h2, h3, h4, h5 {
         font-size: 1.2rem;
     }
 }
-/* Pastikan container map memiliki tinggi yang pas di mobile */
-.map-responsive {
-    height: 300px; /* Di mobile jangan terlalu tinggi agar tombol langsung kelihatan */
-}
 
-@media (min-width: 768px) {
-    .map-responsive {
-        height: 450px;
-    }
-}
-
-/* Memastikan tombol Save the Date / Maps selalu di depan */
-.btn-save-date {
-    position: relative;
-    z-index: 10;
-    display: inline-block !important;
-    margin-top: 15px;
-}
 /* --- KHUSUS DESKTOP (Layar Lebar) --- */
 @media (min-width: 992px) {
     .time-box p {
@@ -910,14 +900,17 @@ h2, h3, h4, h5 {
         gap: 30px;
     }
 
-    /* Di desktop, kita pastikan background foto hilang */
     .doa-mobile-bg {
         background: transparent !important;
         padding: 20px;
     }
+
+    .map-responsive {
+        height: 450px; /* Desktop lebih tinggi */
+    }
 }
 
-/* --- KEYFRAMES (Global) --- */
+/* --- KEYFRAMES --- */
 @keyframes smoothZoomMobile {
     0% { transform: scale(1); }
     50% { transform: scale(1.15); } 
