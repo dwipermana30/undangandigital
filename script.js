@@ -113,25 +113,33 @@ function animateOnScroll() {
     window.addEventListener("resize", animateOnScroll);
     
     // --- 3. Buka Undangan Event ---
-    if (openBtn) {
-        openBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            coverPage.classList.add("fade-out");
+   if (openBtn) {
+    openBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        coverPage.classList.add("fade-out");
+        
+        // Ambil semua gambar hero
+        const images = document.querySelectorAll(".hero-bg-img");
+        
+        setTimeout(() => {
+            coverPage.style.display = "none";
+            mainContent.classList.add("fade-in");
+            document.body.style.overflow = "auto";
             
-            setTimeout(() => {
-                coverPage.style.display = "none";
-                mainContent.classList.add("fade-in");
-                document.body.style.overflow = "auto";
-                
-                startSlideshow(); 
-                animateOnScroll(); 
-            }, 500);
-
-            if (music) {
-                music.play().catch(err => console.log("Autoplay dicegah browser"));
+            // FIX: Paksa foto pertama langsung 'active' agar mulai zoom-out dari 1.15 ke 1
+            if (images.length > 0) {
+                images[0].classList.add("active");
             }
-        });
-    }
+            
+            startSlideshow(); 
+            animateOnScroll(); 
+        }, 500);
+
+        if (music) {
+            music.play().catch(err => console.log("Autoplay dicegah browser"));
+        }
+    });
+}
 
     // --- 4. Countdown Timer ---
     const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
