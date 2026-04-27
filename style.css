@@ -189,7 +189,7 @@ body {
     /* 0s - 1s: Diam sejenak di awal */
     10% { transform: scale(1); }
     /* 1s - 5s: Zoom in perlahan ke 1.15 (selesai di detik ke-5) */
-    50% { transform: scale(1.15); }
+    50% { transform: scale(1); }
     /* 5s - 9s: Zoom out perlahan kembali ke 1 (selesai di detik ke-9) */
     90% { transform: scale(1); }
     /* 9s - 10s: Diam di posisi normal (Buffer agar tidak patah saat transisi) */
