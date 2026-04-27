@@ -155,14 +155,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Pastikan cover agar memenuhi layar */
     opacity: 0;
     z-index: 1;
     filter: blur(10px);
-    /* Mulai dari agak besar */
     transform: scale(1.15); 
-    /* Transisi saat kembali ke mode standby (harus halus) */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
+    /* HAPUS transisi transform di sini agar tidak 'membalas' saat reset */
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out;
     will-change: opacity, transform;
 }
 .text-stroke-black {
@@ -177,19 +176,18 @@ body {
     opacity: 1;
     filter: blur(0);
     z-index: 3;
-    /* Zoom out perlahan ke ukuran normal */
     transform: scale(1); 
-    /* Opacity & Blur cepat (3s), tapi Zoom SANGAT lambat (15s) */
+    /* Gunakan transisi transform hanya di sini (15 detik) */
     transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 15s linear;
 }
 .hero-bg-img.exit {
     opacity: 0;
     filter: blur(12px);
-    z-index: 2; /* Di bawah active, tapi di atas standby */
-    /* PAKSA tetap di scale 1 agar tidak 'loncat' ke 1.15 saat menghilang */
+    z-index: 2;
+    /* KUNCI: Tetapkan scale(1) dan JANGAN beri transisi transform 
+       agar posisinya terkunci diam saat memudar */
     transform: scale(1); 
-    /* Transisi keluar harus sama durasinya dengan masuknya foto baru */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out; 
 }
 @keyframes smoothZoom {
     0% { transform: scale(1); }
