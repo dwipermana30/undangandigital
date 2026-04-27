@@ -27,42 +27,44 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-   // --- 1. Hero Slideshow Logic (Fixed) ---
-    function showImage(nextIndex) {
-        // Ambil ulang elemen jika diperlukan (untuk memastikan tidak kosong)
-        const images = document.querySelectorAll(".hero-bg-img");
-        if (!images.length) return;
-        
-        const currentImg = images[currentImageIndex];
-        const nextImg = images[nextIndex];
+   // --- 1. Hero Slideshow Logic (Updated) ---
+function showImage(nextIndex) {
+    const images = document.querySelectorAll(".hero-bg-img");
+    if (images.length === 0) return;
+    
+    // Hilangkan class active dan exit dari semua gambar untuk reset bersih
+    images.forEach(img => {
+        img.classList.remove("active");
+        img.classList.remove("exit");
+    });
 
-        // Reset class exit agar tidak menumpuk
-        images.forEach(img => img.classList.remove("exit"));
-
-        if (currentImg) {
-            currentImg.classList.remove("active");
-            currentImg.classList.add("exit");
-        }
-        
-        if (nextImg) {
-            nextImg.classList.add("active");
-        }
-
-        currentImageIndex = nextIndex;
+    // Gambar lama (current) diberikan class exit
+    const currentImg = images[currentImageIndex];
+    if (currentImg) {
+        currentImg.classList.add("exit");
+    }
+    
+    // Gambar baru (next) diberikan class active
+    const nextImg = images[nextIndex];
+    if (nextImg) {
+        nextImg.classList.add("active");
     }
 
-    function startSlideshow() {
-        if (slideshowTimeout) clearInterval(slideshowTimeout); 
-        
-        // Cek apakah gambar ada sebelum memulai
-        const images = document.querySelectorAll(".hero-bg-img");
-        if (images.length > 0) {
-            slideshowTimeout = setInterval(() => {
-                const nextIndex = (currentImageIndex + 1) % images.length;
-                showImage(nextIndex);
-            }, 11000); // 11 Detik
-        }
+    currentImageIndex = nextIndex;
+}
+
+function startSlideshow() {
+    // Bersihkan interval yang mungkin sudah ada
+    if (slideshowTimeout) clearInterval(slideshowTimeout); 
+    
+    const images = document.querySelectorAll(".hero-bg-img");
+    if (images.length > 1) { // Hanya jalan jika gambar lebih dari satu
+        slideshowTimeout = setInterval(() => {
+            const nextIndex = (currentImageIndex + 1) % images.length;
+            showImage(nextIndex);
+        }, 5000); // Ubah ke 5 detik untuk testing, jika kelamaan (11 detik) sering dikira macet
     }
+}
     
    // --- 2. Scroll Trigger Logic ---
 function animateOnScroll() {
