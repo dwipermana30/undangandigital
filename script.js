@@ -27,25 +27,24 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-   // --- 1. Hero Slideshow Logic (Updated) ---
+// --- 1. Hero Slideshow Logic (Fixed No-Flicker) ---
 function showImage(nextIndex) {
     const images = document.querySelectorAll(".hero-bg-img");
     if (images.length === 0) return;
     
-    // Hilangkan class active dan exit dari semua gambar untuk reset bersih
-    images.forEach(img => {
-        img.classList.remove("active");
-        img.classList.remove("exit");
-    });
-
-    // Gambar lama (current) diberikan class exit
     const currentImg = images[currentImageIndex];
+    const nextImg = images[nextIndex];
+
+    // 1. Gambar yang baru akan masuk, kita bersihkan dulu status 'exit' lama jika ada
+    images.forEach(img => img.classList.remove("exit"));
+
+    // 2. Gambar yang sedang tampil (lama) dijadikan 'exit' agar memudar halus
     if (currentImg) {
+        currentImg.classList.remove("active");
         currentImg.classList.add("exit");
     }
     
-    // Gambar baru (next) diberikan class active
-    const nextImg = images[nextIndex];
+    // 3. Gambar berikutnya dijadikan 'active'
     if (nextImg) {
         nextImg.classList.add("active");
     }
@@ -54,15 +53,14 @@ function showImage(nextIndex) {
 }
 
 function startSlideshow() {
-    // Bersihkan interval yang mungkin sudah ada
     if (slideshowTimeout) clearInterval(slideshowTimeout); 
     
     const images = document.querySelectorAll(".hero-bg-img");
-    if (images.length > 1) { // Hanya jalan jika gambar lebih dari satu
+    if (images.length > 1) {
         slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % images.length;
             showImage(nextIndex);
-        }, 5000); // Ubah ke 5 detik untuk testing, jika kelamaan (11 detik) sering dikira macet
+        }, 6000); // Durasi 6 detik (2s transisi + 4s diam)
     }
 }
     
