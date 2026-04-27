@@ -270,7 +270,7 @@ function animateOnScroll() {
     }
 
     // --- 6. Gallery Modal & Navigation ---
-    const galleryImages = ['foto1.webp', 'foto2.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto6.webp', 'foto7.webp', 'foto8.webp'];
+    const galleryImages = ['foto1.webp', 'foto8.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto9.webp', 'foto7.webp', 'foto6.webp'];
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
     const nextBtn = document.getElementById('nextGalleryBtn');
