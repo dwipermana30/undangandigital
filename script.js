@@ -29,34 +29,39 @@
 
    // --- 1. Hero Slideshow Logic (Fixed) ---
     function showImage(nextIndex) {
-        if (!heroBgImages.length) return;
+        // Ambil ulang elemen jika diperlukan (untuk memastikan tidak kosong)
+        const images = document.querySelectorAll(".hero-bg-img");
+        if (!images.length) return;
         
-        const currentImg = heroBgImages[currentImageIndex];
-        const nextImg = heroBgImages[nextIndex];
+        const currentImg = images[currentImageIndex];
+        const nextImg = images[nextIndex];
 
-        // Reset semua status agar tidak ada class 'exit' yang tertinggal
-        heroBgImages.forEach(img => img.classList.remove("exit"));
+        // Reset class exit agar tidak menumpuk
+        images.forEach(img => img.classList.remove("exit"));
 
         if (currentImg) {
             currentImg.classList.remove("active");
-            currentImg.classList.add("exit"); // Foto lama keluar
+            currentImg.classList.add("exit");
         }
         
         if (nextImg) {
-            nextImg.classList.add("active"); // Foto baru masuk (Z-index lebih tinggi)
+            nextImg.classList.add("active");
         }
 
         currentImageIndex = nextIndex;
     }
 
     function startSlideshow() {
-        // Gunakan interval agar perulangan otomatis berjalan setiap 11 detik
         if (slideshowTimeout) clearInterval(slideshowTimeout); 
         
-        slideshowTimeout = setInterval(() => {
-            const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
-            showImage(nextIndex);
-        }, 11000);
+        // Cek apakah gambar ada sebelum memulai
+        const images = document.querySelectorAll(".hero-bg-img");
+        if (images.length > 0) {
+            slideshowTimeout = setInterval(() => {
+                const nextIndex = (currentImageIndex + 1) % images.length;
+                showImage(nextIndex);
+            }, 11000); // 11 Detik
+        }
     }
     
    // --- 2. Scroll Trigger Logic ---
