@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Undangan Pernikahan Dwi & Niken</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Forum&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preload" as="image" href="foto2.webp" fetchpriority="high">
+<link rel="preload" as="image" href="foto1.webp" fetchpriority="high">
+
+<link rel="preload" as="image" href="foto3.webp">
+<link rel="preload" as="image" href="foto4.webp">
+<link rel="preload" as="image" href="foto5.webp">
+<link rel="preload" as="image" href="foto6.webp">
+<link rel="preload" as="image" href="foto7.webp">
+<link rel="preload" as="image" href="foto8.webp">
+<link rel="preload" as="image" href="foto9.webp">
+
+<link rel="preload" as="image" href="pengantin1.webp">
+<link rel="preload" as="image" href="pengantin2.webp">
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script src="script.js"></script>
+<div class="cover">
+    <div class="background-container cover-bg"></div>
+    <div class="cover-content text-center">
+        <p class="cover-intro">We invite you to celebrate our wedding</p>
+        
+        <h1 class="cover-couple">Dwi & Niken</h1>
+        
+        <p class="cover-date">Rabu, 06 Mei 2026</p>
+        
+        <button id="open-invitation-btn" class="btn btn-outline-light mt-4 custom-open-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope me-2" viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383z"/>
+            </svg>
+            Buka Undangan
+        </button>
+    </div>
+</div>
+
+<main id="main-content">
+    <header class="hero d-flex align-items-center">
+        <div class="hero-bg">
+            <img class="hero-bg-img active" src="foto2.webp" alt="foto1" loading="eager">
+            <img class="hero-bg-img" src="foto1.webp" alt="foto2" loading="lazy">
+            <img class="hero-bg-img" src="foto3.webp" alt="foto3" loading="lazy">
+            <img class="hero-bg-img" src="foto4.webp" alt="foto4" loading="lazy">
+            <img class="hero-bg-img" src="foto5.webp" alt="foto5" loading="lazy">
+            <img class="hero-bg-img" src="foto6.webp" alt="foto6" loading="lazy">
+            <img class="hero-bg-img" src="foto7.webp" alt="foto7" loading="lazy">
+            <img class="hero-bg-img" src="foto8.webp" alt="foto8" loading="lazy">
+            <img class="hero-bg-img" src="foto9.webp" alt="foto9" loading="lazy">
+            
+        </div>
+       <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 hero-text text-center mx-auto">
+                <p class="small-intro">We invite you to celebrate our wedding</p>
+                
+                <h1 class="couple-name">Dwi & Niken</h1>
+
+                <div class="countdown d-flex gap-3 justify-content-center mt-4" id="countdown">
+                    <div><span id="days">00</span><small>Days</small></div>
+                    <div><span id="hours">00</span><small>Hours</small></div>
+                    <div><span id="mins">00</span><small>Minutes</small></div>
+                    <div><span id="secs">00</span><small>Seconds</small></div>
+                </div>
+
+                <p class="date mt-4">Rabu, 06 Mei 2026 • Griya Taksu - Gianyar</p>
+                
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Wedding+Dwi+%26+Niken&dates=20260506T020000Z/20260506T140000Z&details=Merayakan+pernikahan+Dwi+dan+Niken+di+Griya+Taksu+Gianyar&location=Griya+Taksu,+Gianyar,+Bali" 
+   target="_blank" 
+   class="btn-save-date">
+    🗓️ Save the Date
+</a>
+            </div>
+        </div>
+    </div>
+</header>
+    
+<section id="doa" class="py-5">
+    <div class="container text-center">
+        <div class="doa-mobile-bg">
+            <p class="doa-text mt-4">Om Swastyastu</p>
+            <p class="doa-text">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami Bermaksud Mengundang Bapak/Ibu/Saudara/I Pada Upacara Manusa Yadnya Pawiwahan Putra Dan Putri Kami.</p>  
+        </div>
+    </div>
+</section>
+
+   <section id="pengantin" class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center justify-content-center">
+            <div class="col-lg-6 mb-5">
+                <div class="pengantin-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="pengantin1.webp">
+                    <img src="pengantin1.webp" alt="Pengantin Pria" class="pengantin-img">
+                    <div class="pengantin-overlay">
+                        <h5 class="pengantin-name">Kadek Agus Dwi Permana</h5>
+                        <p class="pengantin-desc">Putra kedua dari <br> I Ketut Dangin & Ni Nengah Arini</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="pengantin-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="pengantin2.webp">
+                    <img src="pengantin2.webp" alt="Pengantin Wanita" class="pengantin-img">
+                    <div class="pengantin-overlay">
+                        <h5 class="pengantin-name">Ni Putu Niken Diah Prastika</h5>
+                        <p class="pengantin-desc">Putri pertama dari <br> Ketut Somedana & Ni Made Serly Marlina</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <section id="details" class="py-5">
+    <div class="container text-center">
+        <p class="mb-4 reveal" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--accent);">
+            Yang akan dilaksanakan pada:
+        </p>
+        
+        <div class="d-flex justify-content-center align-items-center mb-5 wedding-date-row reveal">
+            <div class="date-side">MEI</div>
+            <div class="date-divider"><div class="line"></div></div>
+            <div class="date-main">06</div>
+            <div class="date-divider"><div class="line"></div></div>
+            <div class="date-side">2026</div>
+        </div>
+
+        <div class="row justify-content-center align-items-center time-row reveal">
+            <div class="col-5 col-md-3 time-box">
+                <h5>Natab</h5>
+                <p>08.00 - 10.20</p>
+                <p>WITA</p>
+            </div>
+            <div class="col-2 d-flex justify-content-center">
+                <div class="center-ornament"></div>
+            </div>
+            <div class="col-5 col-md-3 time-box">
+                <h5>Resepsi</h5>
+                <p>10.20 - 14.00</p>
+                <p>WITA</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="container py-5 gallery">
+        <h2 class="text-center mb-4">Our Moments</h2>
+        <div class="photo-gallery">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="0"><img src="foto1.webp" alt="foto1"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="1"><img src="foto8.webp" alt="foto2"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="2"><img src="foto3.webp" alt="foto3"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="3"><img src="foto4.webp" alt="foto4"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="4"><img src="foto5.webp" alt="foto5"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="5"><img src="foto9.webp" alt="foto6"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="6"><img src="foto7.webp" alt="foto7"></a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="7"><img src="foto6.webp" alt="foto8"></a>
+        </div>
+    </section>
+<section id="location" class="py-5">
+    <div class="container">
+        <div class="row text-center mb-4">
+            <div class="col">
+                <h2 class="section-title">Lokasi Acara</h2>
+                <p class="doa-text">Griya Taksu - Gianyar</p>
+                <p class="small text-muted">Jl. Ir. Sutami, Kemenuh, Kec. Sukawati, Kabupaten Gianyar, Bali</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="map-responsive shadow-sm mb-4" style="border-radius: 15px; overflow: hidden; position: relative;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.367205151523!2d115.2890!3d-8.5830!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f9829988a8f%3A0xc3f7f45b741097!2sGriya%20Taksu!5e0!3m2!1sid!2sid!4v1713160000000" 
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="text-center">
+                    <a href="https://maps.app.goo.gl/9R6XhWz7M1aG6Wq67" target="_blank" class="btn-save-date" style="background-color: var(--accent); border: none; text-decoration: none; display: inline-block; padding: 12px 25px; border-radius: 30px; color: white;">
+                        📍 Buka di Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+            <h4 class="mb-3">Wedding Gift</h4>
+            <div class="gift-card mx-auto p-4 rounded shadow-sm bg-white" style="max-width:360px;">
+                <div class="bank fw-bold">Bank BCA</div>
+                <div class="accnum my-2">4390447634</div>
+                <div class="accname text-muted">Kadek Agus Dwi Permana</div>
+                <button id="copyBtn" class="btn btn-outline-primary btn-sm mt-3">Salin No. Rekening</button>
+            </div>
+        </div>
+    </section>
+
+   <section id="rsvp" class="py-5">
+    <div class="container">
+        <h3 class="text-center mb-4">Konfirmasi Kedatangan</h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form id="rsvpForm" class="p-4 border rounded shadow-sm bg-white">
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" id="inputNama" class="form-control" required placeholder="Nama Anda">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kehadiran</label>
+                        <select id="inputHadir" class="form-select">
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak dapat hadir</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pesan / Ucapan</label>
+                        <textarea id="inputPesan" rows="3" class="form-control" placeholder="Tulis ucapan..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Konfirmasi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    <div class="row justify-content-center mt-5">
+    <div class="col-lg-6">
+        <div class="comment-container">
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-name">Keluarga Besar BPR</span>
+                    <span class="badge-hadir">Hadir</span>
+                </div>
+                <p class="comment-text">Selamat menempuh hidup baru Dwi & Niken! Semoga menjadi keluarga yang berbahagia selamanya.</p>
+                <div class="comment-footer">
+                    <small><i class="bi bi-clock"></i> Baru saja</small>
+                    <span class="reply-btn">Reply</span>
+                </div>
+            </div>
+
+            <hr class="comment-divider">
+
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-name">Squad 69</span>
+                    <span class="badge-hadir">Hadir</span>
+                </div>
+                <p class="comment-text">Congrats brother! Lancar sampai hari H. Maaf belum bisa bantu banyak.</p>
+                <div class="comment-footer">
+                    <small><i class="bi bi-clock"></i> 2 jam yang lalu</small>
+                    <span class="reply-btn">Reply</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer class="py-4 text-center small text-muted">
+        © 2026 Dwi & Niken — Undangan Digital
+    </footer>
+</main>
+
+<audio id="bg-music" loop>
+    <source src="music1.mp3" type="audio/mpeg">
+</audio>
+<div class="music-btn" id="music-btn">🎵</div>
+
+<div class="modal fade" id="galleryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center p-0 position-relative">
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" style="z-index: 1060;"></button>
+                <button class="modal-nav-btn prev-btn" id="prevGalleryBtn">‹</button>
+                <img src="" class="img-fluid rounded" id="galleryModalImage">
+                <button class="modal-nav-btn next-btn" id="nextGalleryBtn">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
