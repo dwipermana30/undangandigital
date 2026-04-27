@@ -36,26 +36,24 @@ function showImage(nextIndex) {
     const nextImg = images[nextIndex];
 
     if (currentImg) {
+        // Tambahkan blur dan hilangkan opacity
         currentImg.classList.remove("active");
         currentImg.classList.add("exit");
         
-        // Pastikan class 'exit' benar-benar hilang SETELAH transisi memudar (3s) selesai
+        // Bersihkan class exit setelah transisi fade-out (1.5s) selesai
         setTimeout(() => {
             currentImg.classList.remove("exit");
-            // Saat class exit hilang, dia kembali ke base class (scale 1.15)
-            // Karena opacity sudah 0, loncatannya tidak akan terlihat mata.
-        }, 3000); 
+        }, 1500); 
     }
     
     if (nextImg) {
-        // Beri sedikit delay (50ms) agar browser sempat memproses reset scale jika diperlukan
-        setTimeout(() => {
-            nextImg.classList.add("active");
-        }, 50);
+        // Munculkan gambar berikutnya
+        nextImg.classList.add("active");
     }
 
     currentImageIndex = nextIndex;
 }
+
 function startSlideshow() {
     if (slideshowTimeout) clearInterval(slideshowTimeout); 
     
@@ -64,7 +62,7 @@ function startSlideshow() {
         slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % images.length;
             showImage(nextIndex);
-        }, 8000); // Naikkan ke 8 detik (3s transisi + 5s diam)
+        }, 8000); // 8 detik total (termasuk waktu zoom in-out)
     }
 }
     
