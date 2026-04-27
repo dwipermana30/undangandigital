@@ -80,7 +80,7 @@ body {
 .cover .cover-date, 
 .date {
     /* FIX: Menggunakan font Serif yang sama dengan detail di bawah */
-    font-family: 'forum', serif;
+    font-family: 'Forum', serif;
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -92,7 +92,7 @@ body {
 
 /* --- UPDATE FONT COVER (Pinyon Script) --- */
 .cover .cover-couple {
-    font-family: 'forum', serif;
+    font-family: 'Forum', serif;
     font-size: 5rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
@@ -355,7 +355,7 @@ h2, h3, h4, h5 {
 
 /* --- UPDATE NAMA PENGANTIN (Pinyon Script) --- */
 .pengantin-name {
-    font-family: 'forum', serif;
+    font-family: 'Forum', serif;
     font-size: 1.2rem; 
     font-weight: 400;
     color: #ffffff !important;
@@ -827,8 +827,8 @@ h2, h3, h4, h5 {
         border-radius: 0; 
         padding: 20px;
         background: rgba(0, 0, 0, 0.4); 
-        backdrop-filter: grayscale(100);    
-        -webkit-backdrop-filter: grayscale(100);
+        backdrop-filter: grayscale(100%);    
+        -webkit-backdrop-filter: grayscale(100%);
     }
 
     .hero {
