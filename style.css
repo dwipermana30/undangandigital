@@ -224,7 +224,7 @@ body {
 
 .countdown div {
     /* Mengubah background agar lebih kontras di atas foto slideshow */
-    background: rgba(0, 0, 0, 0.45) !important; 
+    background: rgba(0, 0, 0, 0.20) !important; 
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.2);
