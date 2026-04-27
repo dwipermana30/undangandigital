@@ -244,10 +244,6 @@ body {
     line-height: 1;
     text-shadow: none; /* Menghapus shadow agar lebih clean karena sudah ada box gelap */
 }
-.countdown span {
-    font-size: 1.4rem;
-    font-weight: 700;
-}
 .countdown small {
     font-size: 0.7rem;
     color: #ffffff !important;
