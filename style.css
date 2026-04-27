@@ -848,7 +848,8 @@ h2, h3, h4, h5 {
     }
 
     .hero-bg-img.active {
-        animation: smoothZoomMobile 12s ease-in-out infinite; 
+        /* UBAH: 12s jadi 10s, dan infinite jadi forwards */
+        animation: smoothZoomMobile 10s ease-in-out forwards; 
         opacity: 1;
         filter: blur(0);
     }
@@ -1053,6 +1054,8 @@ h2, h3, h4, h5 {
 /* --- KEYFRAMES --- */
 @keyframes smoothZoomMobile {
     0% { transform: scale(1); }
-    50% { transform: scale(1.15); } 
+    45% { transform: scale(1.15); }
+    /* UBAH: Selesaikan zoom out di detik ke-9 (90%), sisanya diam agar aman */
+    90% { transform: scale(1); } 
     100% { transform: scale(1); }
 }
