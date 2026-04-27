@@ -160,7 +160,7 @@ body {
     filter: blur(0);
     transform: scale(1);
     z-index: 1;
-    /* Transisi opacity & blur saat keluar dibuat 1.5s agar halus */
+    /* Hanya transisi untuk opacity dan filter. JANGAN masukkan transform di sini */
     transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
     will-change: transform, opacity, filter;
 }
@@ -175,22 +175,26 @@ body {
 .hero-bg-img.active {
     opacity: 1;
     z-index: 3;
-    /* Durasi total 9 detik (1+4+4) */
-    animation: zoomSequence 9s linear infinite; 
+    /* Durasi total 10 detik, gunakan forwards agar reset tiap ganti foto */
+    animation: zoomSequence 10s ease-in-out forwards; 
 }
 .hero-bg-img.exit {
     opacity: 0;
-    filter: blur(15px); /* Efek blur muncul saat foto diganti */
+    filter: blur(15px);
     z-index: 2;
-    animation: none; 
+    /* Tetap biarkan transform di posisi terakhir saat exit */
 }
 @keyframes zoomSequence {
-    0% { transform: scale(1); }        /* Start */
-    11.11% { transform: scale(1); }    /* Diam selama 1 detik (1/9 * 100) */
-    55.55% { transform: scale(1.15); } /* Zoom In selama 4 detik (4/9 * 100) */
-    100% { transform: scale(1); }      /* Zoom Out selama 4 detik (4/9 * 100) */
+    0% { transform: scale(1); }
+    /* 0s - 1s: Diam sejenak di awal */
+    10% { transform: scale(1); }
+    /* 1s - 5s: Zoom in perlahan ke 1.15 (selesai di detik ke-5) */
+    50% { transform: scale(1.15); }
+    /* 5s - 9s: Zoom out perlahan kembali ke 1 (selesai di detik ke-9) */
+    90% { transform: scale(1); }
+    /* 9s - 10s: Diam di posisi normal (Buffer agar tidak patah saat transisi) */
+    100% { transform: scale(1); }
 }
-
 .couple-name {
     font-family: 'Pinyon Script', cursive;
     font-size: 5rem;
