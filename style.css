@@ -811,7 +811,8 @@ h2, h3, h4, h5 {
 /* --- RESPONSIVE MOBILE (General) --- */
 @media (max-width: 768px) {
     .cover { 
-        min-height: 100dvh; 
+        min-height: -webkit-fill-available; 
+        bottom: 0; 
         height: 100dvh;
     }
 
@@ -856,6 +857,8 @@ h2, h3, h4, h5 {
 
     .background-container {
         height: 100dvh;
+        min-height: -webkit-fill-available;
+        bottom: 0;
         background-size: cover !important;
     }
 
