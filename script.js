@@ -28,6 +28,7 @@
     let slideshowTimeout;
 
 // --- 1. Hero Slideshow Logic (Fixed No-Flicker) ---
+// --- Update Fungsi showImage agar transisi blur lebih halus ---
 function showImage(nextIndex) {
     const images = document.querySelectorAll(".hero-bg-img");
     if (images.length === 0) return;
@@ -36,24 +37,22 @@ function showImage(nextIndex) {
     const nextImg = images[nextIndex];
 
     if (currentImg) {
-        // Tambahkan blur dan hilangkan opacity
         currentImg.classList.remove("active");
-        currentImg.classList.add("exit");
+        currentImg.classList.add("exit"); // Ini memicu filter: blur(15px) di CSS
         
-        // Bersihkan class exit setelah transisi fade-out (1.5s) selesai
         setTimeout(() => {
             currentImg.classList.remove("exit");
         }, 1500); 
     }
     
     if (nextImg) {
-        // Munculkan gambar berikutnya
         nextImg.classList.add("active");
     }
 
     currentImageIndex = nextIndex;
 }
 
+// --- Update Interval menjadi 9 detik (9000ms) ---
 function startSlideshow() {
     if (slideshowTimeout) clearInterval(slideshowTimeout); 
     
@@ -62,8 +61,37 @@ function startSlideshow() {
         slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % images.length;
             showImage(nextIndex);
-        }, 8000); // 8 detik total (termasuk waktu zoom in-out)
+        }, 9000); // Harus SAMA dengan durasi di CSS (9 detik)
     }
+}
+
+// --- Saat tombol diklik ---
+if (openBtn) {
+    openBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        coverPage.classList.add("fade-out");
+        
+        setTimeout(() => {
+            coverPage.style.display = "none";
+            mainContent.classList.add("fade-in");
+            document.body.style.overflow = "auto";
+            
+            const images = document.querySelectorAll(".hero-bg-img");
+            if (images.length > 0) {
+                // Reset index ke 0 dan aktifkan foto pertama
+                currentImageIndex = 0;
+                images.forEach(img => img.classList.remove("active", "exit"));
+                images[0].classList.add("active");
+            }
+            
+            startSlideshow(); 
+            animateOnScroll(); 
+        }, 500);
+
+        if (music) {
+            music.play().catch(err => console.log("Autoplay dicegah"));
+        }
+    });
 }
     
    // --- 2. Scroll Trigger Logic ---
