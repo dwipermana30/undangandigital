@@ -39,15 +39,19 @@ function showImage(nextIndex) {
         currentImg.classList.remove("active");
         currentImg.classList.add("exit");
         
-        // Bersihkan class exit setelah transisi memudar selesai (3 detik)
-        // agar gambar kembali ke scale 1.15 secara diam-diam (opacity sudah 0)
+        // Pastikan class 'exit' benar-benar hilang SETELAH transisi memudar (3s) selesai
         setTimeout(() => {
             currentImg.classList.remove("exit");
+            // Saat class exit hilang, dia kembali ke base class (scale 1.15)
+            // Karena opacity sudah 0, loncatannya tidak akan terlihat mata.
         }, 3000); 
     }
     
     if (nextImg) {
-        nextImg.classList.add("active");
+        // Beri sedikit delay (50ms) agar browser sempat memproses reset scale jika diperlukan
+        setTimeout(() => {
+            nextImg.classList.add("active");
+        }, 50);
     }
 
     currentImageIndex = nextIndex;
