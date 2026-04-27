@@ -38,58 +38,68 @@ function showImage(nextIndex) {
 
     if (currentImg) {
         currentImg.classList.remove("active");
-        currentImg.classList.add("exit"); // Ini memicu filter: blur(15px) di CSS
+        currentImg.classList.add("exit"); 
         
         setTimeout(() => {
             currentImg.classList.remove("exit");
-        }, 1500); 
+        }, 1500); // Sesuai dengan durasi transition opacity di CSS
     }
     
     if (nextImg) {
+        // Hapus class exit jika ada sisa dari putaran sebelumnya
+        nextImg.classList.remove("exit");
         nextImg.classList.add("active");
     }
 
     currentImageIndex = nextIndex;
 }
 
-// --- Update Interval menjadi 9 detik (9000ms) ---
 function startSlideshow() {
     if (slideshowTimeout) clearInterval(slideshowTimeout); 
     
     const images = document.querySelectorAll(".hero-bg-img");
     if (images.length > 1) {
+        // Set ke 10000ms (10 detik) agar sinkron dengan CSS
         slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % images.length;
             showImage(nextIndex);
-        }, 9000); // Harus SAMA dengan durasi di CSS (9 detik)
+        }, 10000); 
     }
 }
 
-// --- Saat tombol diklik ---
+// --- 3. Buka Undangan Event (CONSOLIDATED & FIXED) ---
 if (openBtn) {
     openBtn.addEventListener("click", function(e) {
         e.preventDefault();
         coverPage.classList.add("fade-out");
+        
+        // Ambil elemen gambar
+        const images = document.querySelectorAll(".hero-bg-img");
         
         setTimeout(() => {
             coverPage.style.display = "none";
             mainContent.classList.add("fade-in");
             document.body.style.overflow = "auto";
             
-            const images = document.querySelectorAll(".hero-bg-img");
+            // Pastikan Hero Height menyesuaikan (untuk mobile)
+            adjustHeroHeight();
+
             if (images.length > 0) {
-                // Reset index ke 0 dan aktifkan foto pertama
+                // Reset semua ke kondisi awal sebelum mulai
                 currentImageIndex = 0;
                 images.forEach(img => img.classList.remove("active", "exit"));
+                // Aktifkan foto pertama
                 images[0].classList.add("active");
+                
+                // Jalankan slideshow setelah foto pertama muncul
+                startSlideshow(); 
             }
             
-            startSlideshow(); 
             animateOnScroll(); 
         }, 500);
 
         if (music) {
-            music.play().catch(err => console.log("Autoplay dicegah"));
+            music.play().catch(err => console.log("Autoplay dicegah browser"));
         }
     });
 }
