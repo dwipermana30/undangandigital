@@ -148,6 +148,7 @@ body {
     overflow: hidden;
 }
 
+/* Keadaan Standar (Siap-siap tampil) */
 .hero-bg-img {
     position: absolute;
     top: 0;
@@ -157,10 +158,11 @@ body {
     object-fit: cover;
     opacity: 0;
     z-index: 1;
-    /* Tambahkan transform di transition agar zoom out-nya halus saat tidak aktif */
-    transition: opacity 2.5s ease-in-out, transform 2.5s ease-in-out, filter 2.5s ease-in-out;
-    transform: scale(1.15); /* Posisi default sedikit zoom agar saat aktif dia membesar */
-    filter: blur(8px);
+    filter: blur(10px);
+    /* Mulai dari agak besar */
+    transform: scale(1.15); 
+    /* Transisi saat kembali ke mode standby (harus halus) */
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
     will-change: opacity, transform;
 }
 .text-stroke-black {
@@ -175,18 +177,19 @@ body {
     opacity: 1;
     filter: blur(0);
     z-index: 3;
-    /* Zoom perlahan saat aktif */
+    /* Zoom out perlahan ke ukuran normal */
     transform: scale(1); 
-    /* Gunakan transisi yang SANGAT LAMA untuk zoom saat aktif agar smooth */
-    transition: opacity 2.5s ease-in-out, transform 12s linear, filter 2.5s ease-in-out;
+    /* Opacity & Blur cepat (3s), tapi Zoom SANGAT lambat (15s) */
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 15s linear;
 }
 .hero-bg-img.exit {
     opacity: 0;
-    filter: blur(10px);
-    z-index: 2;
-    /* Saat keluar, biarkan dia tetap di skala terakhirnya agar tidak 'loncat' */
+    filter: blur(12px);
+    z-index: 2; /* Di bawah active, tapi di atas standby */
+    /* PAKSA tetap di scale 1 agar tidak 'loncat' ke 1.15 saat menghilang */
     transform: scale(1); 
-    transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out;
+    /* Transisi keluar harus sama durasinya dengan masuknya foto baru */
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
 }
 @keyframes smoothZoom {
     0% { transform: scale(1); }
