@@ -135,7 +135,7 @@ body {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(18,18,18,0.55) 0%, rgba(18,18,18,0.2) 60%);
-    z-index: 3;
+    z-index: 10; /* Tingkatkan ke 10 */
 }
 
 .hero-bg {
@@ -524,7 +524,7 @@ h2, h3, h4, h5 {
 }
 .hero-content {
     position: relative;
-    z-index: 10; 
+    z-index: 20; 
     text-align: center;
     padding-top: 15vh; /* Tambahkan ini agar posisi box tidak terlalu nempel ke atas */
 }
@@ -797,6 +797,12 @@ h2, h3, h4, h5 {
     display: block;
     /* Jika foto memiliki background putih bawaan, tambahkan mix-blend-mode (opsional) */
     /* mix-blend-mode: multiply; */
+}
+.photo-gallery a {
+    /* ... properti lainnya ... */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 /* --- RESPONSIVE MOBILE (General) --- */
 @media (max-width: 768px) {
