@@ -165,8 +165,7 @@ body {
     
     /* KUNCI 2: Definisi transition dasar untuk semua status */
     /* Transform diberi durasi pendek agar saat 'reset' ke 1.15 tidak terlihat kasar */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 0.5s ease-in-out;
-    will-change: opacity, transform, filter;
+   transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 0.5s ease-in-out;
 }
 .text-stroke-black {
     text-shadow: 
@@ -192,12 +191,10 @@ body {
     opacity: 0;
     filter: blur(12px);
     z-index: 2;
+    transform: scale(1); /* Tahan di posisi zoom-out terakhir */
     
-    /* KUNCI 5: Tetap tahan di scale(1) selama memudar agar tidak beradu dengan zoom-in/out */
-    transform: scale(1); 
-    
-    /* Gunakan durasi memudar yang sama dengan durasi muncul */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 0.5s ease-in-out;
+    /* UBAH: dari 0.5s menjadi 3s agar selaras dengan opacity */
+    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
 }
 
 @keyframes smoothZoom {
