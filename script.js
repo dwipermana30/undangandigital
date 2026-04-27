@@ -27,37 +27,38 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- 1. Hero Slideshow Logic ---
+   // --- 1. Hero Slideshow Logic (Fixed) ---
     function showImage(nextIndex) {
         if (!heroBgImages.length) return;
+        
         const currentImg = heroBgImages[currentImageIndex];
         const nextImg = heroBgImages[nextIndex];
 
+        // Reset semua status agar tidak ada class 'exit' yang tertinggal
+        heroBgImages.forEach(img => img.classList.remove("exit"));
+
         if (currentImg) {
             currentImg.classList.remove("active");
-            currentImg.classList.add("exit");
+            currentImg.classList.add("exit"); // Foto lama keluar
         }
+        
         if (nextImg) {
-            nextImg.classList.remove("exit");
-            nextImg.classList.add("active");
+            nextImg.classList.add("active"); // Foto baru masuk (Z-index lebih tinggi)
         }
-        setTimeout(() => {
-            heroBgImages.forEach((img, idx) => {
-                if (idx !== nextIndex) img.classList.remove("exit");
-            });
-        }, 2000);
+
         currentImageIndex = nextIndex;
     }
 
     function startSlideshow() {
-        clearTimeout(slideshowTimeout);
-        slideshowTimeout = setTimeout(() => {
+        // Gunakan interval agar perulangan otomatis berjalan setiap 11 detik
+        if (slideshowTimeout) clearInterval(slideshowTimeout); 
+        
+        slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % heroBgImages.length;
             showImage(nextIndex);
-            startSlideshow();
         }, 11000);
     }
-
+    
    // --- 2. Scroll Trigger Logic ---
 function animateOnScroll() {
     const windowHeight = window.innerHeight;
