@@ -35,23 +35,22 @@ function showImage(nextIndex) {
     const currentImg = images[currentImageIndex];
     const nextImg = images[nextIndex];
 
-    // 1. Gambar yang baru akan masuk, kita bersihkan dulu status 'exit' lama jika ada
+    // Bersihkan semua class exit yang tersisa sebelumnya
     images.forEach(img => img.classList.remove("exit"));
 
-    // 2. Gambar yang sedang tampil (lama) dijadikan 'exit' agar memudar halus
     if (currentImg) {
+        // Foto lama transisi ke 'exit' (memudar sambil tetap di scale 1)
         currentImg.classList.remove("active");
         currentImg.classList.add("exit");
     }
     
-    // 3. Gambar berikutnya dijadikan 'active'
     if (nextImg) {
+        // Foto baru masuk ke 'active' (muncul sambil mulai zoom out)
         nextImg.classList.add("active");
     }
 
     currentImageIndex = nextIndex;
 }
-
 function startSlideshow() {
     if (slideshowTimeout) clearInterval(slideshowTimeout); 
     
@@ -60,7 +59,7 @@ function startSlideshow() {
         slideshowTimeout = setInterval(() => {
             const nextIndex = (currentImageIndex + 1) % images.length;
             showImage(nextIndex);
-        }, 6000); // Durasi 6 detik (2s transisi + 4s diam)
+        }, 8000); // Naikkan ke 8 detik (3s transisi + 5s diam)
     }
 }
     
