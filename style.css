@@ -155,17 +155,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Gunakan cover agar penuh di semua layar */
     opacity: 0;
+    filter: blur(0);
+    transform: scale(1);
     z-index: 1;
-    filter: blur(10px);
-    
-    /* KUNCI 1: Tetapkan scale awal */
-    transform: scale(1.15); 
-    
-    /* KUNCI 2: Definisi transition dasar untuk semua status */
-    /* Transform diberi durasi pendek agar saat 'reset' ke 1.15 tidak terlihat kasar */
-   transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 0.5s ease-in-out;
+    /* Transition hanya untuk opacity dan blur agar halus saat ganti foto */
+    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
 }
 .text-stroke-black {
     text-shadow: 
@@ -177,29 +173,21 @@ body {
 }
 .hero-bg-img.active {
     opacity: 1;
-    filter: blur(0);
     z-index: 3;
-    
-    /* KUNCI 3: Tujuan akhir zoom-out */
-    transform: scale(1); 
-    
-    /* KUNCI 4: Gunakan durasi panjang hanya saat aktif */
-    /* Kita pakai 'linear' agar pergerakan zoom-nya konsisten terus-menerus */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 15s linear;
+    /* Jalankan animasi selama 8 detik (sesuai interval JS) */
+    animation: zoomCycle 8s ease-in-out infinite;
 }
 .hero-bg-img.exit {
     opacity: 0;
-    filter: blur(12px);
+    filter: blur(15px);
     z-index: 2;
-    transform: scale(1); /* Tahan di posisi zoom-out terakhir */
-    
-    /* UBAH: dari 0.5s menjadi 3s agar selaras dengan opacity */
-    transition: opacity 3s ease-in-out, filter 3s ease-in-out, transform 3s ease-in-out;
+    /* Hapus animasi zoom saat keluar agar tidak konflik dengan blur */
+    animation: none; 
 }
 
-@keyframes smoothZoom {
+@keyframes zoomCycle {
     0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
 
